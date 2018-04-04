@@ -1,0 +1,67 @@
+<!--pages/sanhuiyike/sanhuiyikedetail.wxml-->
+<view>
+  <scroll-view>
+    <import src="/pages/divide.wxml" />
+    <template is="divide" />
+    <view style='margin-left:20rpx;margin-right:20rpx;font-size:34rpx;width=100%'>{{title}}</view>
+    <view style='margin-left:20rpx;margin-right:20rpx;font-size:30rpx;color:#a1a1a1;width=100%;text-align: right;'>未开始</view>
+    <view style='margin-left:20rpx;margin-right:20rpx;font-size:30rpx;color:#a1a1a1;width=100%;text-align: left;left;margin-bottom:10rpx;'>会议类型 {{type}}</view>
+    <view style='margin-left:20rpx;margin-right:20rpx;font-size:30rpx;color:#a1a1a1;width=100%;text-align: left;margin-bottom:20rpx;'>会议党组织 {{org}}</view>
+    <block wx:if="{{!isSign}}">
+      <template is="line" />
+      <view style='margin-left:20rpx;margin-right:20rpx;font-size:30rpx;width=100%;text-align: left;color:#515151;margin-bottom:25rpx;margin-top:25rpx;'>您未签到，快打开“扫一扫”进行签到吧！</view>
+    </block>
+    <template is="divide" />
+    <view style='flex-direction:row;display: flex;width:100%;'>
+      <view class="label">负责人</view>
+      <view style='margin-left:20rpx;margin-right:20rpx;width=20%;text-align: left;margin-bottom:25rpx;margin-top:20rpx;'>
+        <image class="touxiang" mode="aspectFill" src="{{touxiang}}"></image>
+        <view style='margin-left:20rpx;margin-right:20rpx;font-size:26rpx;color:#515151;text-align: center;'>张三</view>
+      </view>
+    </view>
+    <template is="line" />
+    <view style='flex-direction:row;display: flex;width:100%;'>
+      <view class="label">参与人</view>
+      <view style='margin-left:20rpx;margin-right:20rpx;font-size:30rpx;color:#515151;text-align: center;margin-bottom: 25rpx; margin-top: 20rpx;'>1人</view>
+    </view>
+    <template is="line" />
+    <view style='flex-direction:row;display: flex;width:100%;'>
+      <view class="label">记录人</view>
+      <view style='margin-left:20rpx;margin-right:20rpx;font-size:30rpx;color:#515151;text-align: center;margin-bottom: 25rpx; margin-top: 20rpx;'></view>
+    </view>
+    <template is="line" />
+    <view style='flex-direction:row;display: flex;width:100%;'>
+      <view class="label">主持人</view>
+      <view style='margin-left:20rpx;margin-right:20rpx;font-size:30rpx;color:#515151;text-align: center;margin-bottom: 25rpx; margin-top: 20rpx;'></view>
+    </view>
+    <template is="line" />
+    <view style='flex-direction:row;display: flex;width:100%;'>
+      <view class="label">主讲人及身份</view>
+      <view style='margin-left:20rpx;margin-right:20rpx;font-size:30rpx;color:#515151;text-align: center;margin-bottom: 25rpx; margin-top: 20rpx;'></view>
+    </view>
+    <template is="divide" />
+    <view style='flex-direction:row;display: flex;width:100%;height:145rpx;justify-content:space-around;'>
+      <view style='margin-left:40rpx;text-align: center;'>
+        <view style='color: #717171;font-size: 32rpx;'>2017-12-23</view>
+        <view>08：30</view>
+        <view style='color: #a1a1a1;font-size: 30rpx;'>开始时间</view>
+      </view>
+      <view style='margin-top:10rpx;'>
+        <view style='width:100%;flex-direction:row;display: flex;align-items: baseline;'>
+          <view style='color: #a1a1a1;font-size: 30rpx;width:50%;text-align:right;'>大约</view>
+          <view style='color: #a1a1a1;'>3.00</view>
+          <view style='color: #a1a1a1;font-size: 30rpx;width:50%;text-align:left;'>小时</view>
+        </view>
+        <canvas canvas-id="from_to" style='width:100%;'></canvas>
+      </view>
+      <view style='margin-right:40rpx;text-align: center;'>
+        <view style='color: #717171;font-size: 32rpx;'>2017-12-23</view>
+        <view>11：30</view>
+        <view style='color: #a1a1a1;font-size: 30rpx;'>结束时间</view>
+      </view>
+    </view>
+    <template is="divide" />
+
+  </scroll-view>
+  <view class='bottomview' hover-class='bottomview_pressed'>确认出席</view>
+</view>

@@ -1,0 +1,137 @@
+<import src="/pages/divide.wxml" />
+<wxs src="../../../utils/common.wxs" module="wxsUtil" />
+<scroll-view style='height:{{height*0.91}}px;background-color:#f7f7f7'>
+  <view style='flex-direction: row;display: flex;padding-left:25rpx;padding-top:15rpx;background-color:#ffffff'>
+    <view class='typeLabel'>{{typeLabel}}</view>
+    <view style='margin-left:20rpx;font-size: 34rpx;color:#a4a4a4;'>{{qusetionindex+1}}/{{objList.length}}</view>
+  </view>
+  <view style='padding-left:25rpx;padding-right:25rpx;padding-top:20rpx;padding-bottom:20rpx;font-size: 34rpx;color:#808080;line-height:60rpx;background-color:#ffffff'>
+    {{obj.strQuestionContent}}
+  </view>
+  <template is="line" />
+  <!-- 1，单选、2，多选、3，简答、4，填空 -->
+  <block wx:if="{{obj.numQuestionType == 1||obj.numQuestionType == 2}}">
+    <block wx:for="{{objobjList}}" wx:key="strGuid">
+      <!-- 显示答案 -->
+      <view wx:if="{{isShowAnswer}}">
+        <!-- 错误答案 -->
+        <view wx:if="{{item.numIsChoice == 1 && item.numIsSurefire == 1}}" style='flex-direction: row;display: flex;padding-left:25rpx;padding-top:20rpx;width:100%;font-size: 34rpx;color:#e79e3f;background-color:#ffffff'>
+          <view style='padding-right:20rpx;'>{{wxsUtil.indexToABCD(index)}}</view>
+          <view>{{item.strOptionContent}}</view>
+        </view>
+        <!-- 正确答案 -->
+        <view wx:elif="{{item.numIsSurefire == 2}}" style='flex-direction: row;display: flex;padding-left:25rpx;padding-top:20rpx;width:100%;font-size: 34rpx;color:#68b1f5;background-color:#ffffff'>
+          <view style='padding-right:20rpx;'>{{wxsUtil.indexToABCD(index)}}</view>
+          <view>{{item.strOptionContent}}</view>
+        </view>
+        <!-- 其他答案 -->
+        <view wx:else style='flex-direction: row;display: flex;padding-left:25rpx;padding-top:20rpx;width:100%;font-size: 34rpx;color:#808080;background-color:#ffffff'>
+          <view style='padding-right:20rpx;'>{{wxsUtil.indexToABCD(index)}}</view>
+          <view>{{item.strOptionContent}}</view>
+        </view>
+      </view>
+      <!-- 只有不显示答案的场合，才有点击事件 -->
+      <!-- 不显示答案,但是把之前选过的答案变成蓝色 -->
+      <view wx:elif="{{item.numIsChoice == 1}}" style='flex-direction: row;display: flex;padding-left:25rpx;padding-top:20rpx;width:100%;font-size: 34rpx;color:#68b1f5;background-color:#ffffff' bindtap='anwser' data-anwswer='{{wxsUtil.indexToABCD(index)}} '
+        data-index='{{index}} '>
+        <view style='padding-right:20rpx; '>{{wxsUtil.indexToABCD(index)}}</view>
+        <view>{{item.strOptionContent}}</view>
+      </view>
+      <!-- 不显示答案,但是把之前没选过的答案变成灰色 -->
+      <view wx:else style='flex-direction: row;display: flex;padding-left:25rpx;padding-top:20rpx;width:100%;font-size: 34rpx;color:#808080;background-color:#ffffff ' bindtap='anwser' data-anwswer='{{wxsUtil.indexToABCD(index)}} ' data-index='{{index}} '>
+        <view style='padding-right:20rpx; '>{{wxsUtil.indexToABCD(index)}}</view>
+        <view>{{item.strOptionContent}}</view>
+      </view>
+    </block>
+  </block>
+  <block wx:if="{{obj.numQuestionType == 3||obj.numQuestionType == 4}}">
+    <view style='width:100%;font-size:28rpx;color:#a4a4a4;padding-left:20rpx;padding-top:10rpx;padding-bottom:15rpx;background-color:#ffffff'>你的答案：</view>
+    <block wx:if="{{hiddenmodalput}}">
+      <!-- 防止显示题目导航是出现输入框 -->
+      <view style='background-color:#ffffff;padding-bottom:50rpx;padding-top:20rpx;'>
+        <input class='answerInput' maxlength='499' value="{{obj.strUserExerciseAnswer}}" bindinput='getInputAnswer' disabled='{{ isShowAnswer}}'></input>
+      </view>
+    </block>
+    <template is="line" />
+    <view style='background-color:#ffffff;padding-bottom:20rpx;padding-top:20rpx;'>
+      <view class="okbt" hover-class='okbt_pressed' bindtap='OKbt'>确定</view>
+    </view>
+  </block>
+
+  <view style='height:20rpx;background-color:#ffffff'></view>
+  <block wx:if="{{isShowAnswer}}">
+    <template is="line" />
+    <view style='width:100%;font-size:28rpx;color:#a4a4a4;background-color:#f7f7f7;padding-left:20rpx;padding-top:10rpx;padding-bottom:15rpx;'>答案解析</view>
+    <template is="line" />
+    <view style='width:100%;font-size:32rpx;color:#68b1f5;padding-left:20rpx;padding-top:20rpx;padding-bottom:10rpx;background-color:#ffffff'>答案</view>
+    <view style='width:100%;font-size:34rpx;color:#242424;padding-left:20rpx;padding-top:10rpx;padding-bottom:15rpx;background-color:#ffffff'>{{obj.strAnalysis}}</view>
+    <view style='width:100%;font-size:32rpx;color:#a4a4a4;padding-left:20rpx;padding-top:20rpx;padding-bottom:10rpx;background-color:#ffffff'>解析</view>
+    <view style='width:100%;font-size:34rpx;color:#242424;padding-left:20rpx;padding-top:10rpx;padding-bottom:15rpx;background-color:#ffffff'>{{obj.strAnswer}}</view>
+    <template is="line" />
+  </block>
+</scroll-view>
+<view style='height:{{height*0.09}}px '>
+  <template is="line" />
+  <view style='flex-direction: row;display: flex;height:100%'>
+    <!-- 收藏 -->
+    <block wx:if="{{objList[qusetionindex].numExerciseWrong == 2}}">
+      <view style='flex-direction: column;width:20%;display: flex;justify-content: center;text-align: center;align-items: center;' bindtap='collectClick'>
+        <image style="width:50rpx;height:50rpx;" src='/image/shoucang2.png' mode="aspectFit"></image>
+        <view style="font-size:24rpx;color: #b6011f">已经收藏</view>
+      </view>
+    </block>
+    <block wx:else>
+      <view style='flex-direction: column;width:20%;display: flex;justify-content: center;text-align: center;align-items: center;' bindtap='collectClick'>
+        <image style="width:50rpx;height:50rpx;" src='/image/shoucang.png' mode="aspectFit"></image>
+        <view style="font-size:24rpx;color: #646464">收藏习题</view>
+      </view>
+    </block>
+
+    <!-- 上一题和下一题 -->
+    <view style='width:1px;height:100%;background-color:#f1f1f1' />
+    <view class="beforeAndNextBt" hover-class='beforeAndNextBtPress' bindtap='beforeBt'>上一题</view>
+    <view style='width:1px;height:100%;background-color:#f1f1f1' />
+    <view class="beforeAndNextBt" hover-class='beforeAndNextBtPress' bindtap='nextBt'>下一题</view>
+    <view style='width:1px;height:100%;background-color:#f1f1f1' />
+
+    <!-- 菜单 -->
+    <view style='width:19%;flex-direction: column;display: flex;justify-content: center;align-items: center;' hover-class='menu_press' bindtap='menu_click'>
+      <image style="width:50rpx;height:50rpx;" src='/image/tihao.png' mode="aspectFit"></image>
+      <view style="font-size:24rpx;color: #646464">{{qusetionindex+1}}/{{objList.length}}</view>
+    </view>
+
+  </view>
+</view>
+
+
+<!-- 题目导航对话框 -->
+<block wx:if="{{!hiddenmodalput}}">
+  <scroll-view style='width: 100%; height:{{height *0.8}}px; background-color: #ffffff; position: absolute; top: 0rpx; left: 0rpx;'>
+    <view style='width:100%;height:100%;flex-direction: row;display: flex;flex-wrap:wrap;'>
+      <block wx:for="{{objList}}">
+        <block wx:if="{{qusetionindex == index}}">
+          <!-- 当前所在题目 -->
+          <view class="navigate_now" bindtap='navigate' data-index='{{index}}'>{{index + 1}}</view>
+        </block>
+        <block wx:else>
+          <block wx:if="{{item.numExerciseWrong == 1}}">
+            <block wx:if="{{item.numEXercise == 1}}">
+              <!-- 未做过的题目：灰色 -->
+              <view class='navigate_gray' bindtap='navigate' data-index='{{index}}'>{{index + 1}}</view>
+            </block>
+            <block wx:else>
+              <!-- 做过的题目：蓝色 -->
+              <view class="navigate_blue" bindtap='navigate' data-index='{{index}}'>{{index + 1}}</view>
+            </block>
+          </block>
+          <block wx:else>
+            <!-- 收藏了的题目：黄色 -->
+            <view class='navigate_yellow' bindtap='navigate' data-index='{{index}}'>{{index + 1}}</view>
+          </block>
+
+        </block>
+      </block>
+    </view>
+  </scroll-view>
+  <view style='width: 100%; height:{{height *0.2}}px; background-color: #000000; opacity: 0.5; position: absolute; top: {{height *0.8}}px; left: 0rpx;' bindtap='menuCancel'></view>
+</block>

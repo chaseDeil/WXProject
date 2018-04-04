@@ -1,0 +1,28 @@
+<!--pages/study/exam/myExam.wxml-->
+<wxs src="../../../utils/common.wxs" module="wxsUtil" />
+<import src="/pages/divide.wxml" />
+<page>
+
+  <scroll-view scroll-y='ture' scroll-with-animation="true" class='scrollView' id="scroll-list">
+    <view wx:for="{{array}}" wx:key="{{item.strCourseGuid}}" style='width:100%' class='cell'>
+      <template is="divide" />
+      <view style='padding-left:0rpx;padding-right:0rpx;' hover-class="navigator-hover" bindtap='itemClick' data-guid="{{item.strCourseGuid}}" data-examguid="{{item.strExamGuid}}" data-numcomplete="{{item.numComplete}}">
+        <view style='flex-direction: row;display: flex;padding-bottom:0rpx;'>
+          <image class="cover" src="{{item.strCourseUrl}}" binderror="binderrorimg" data-guid="{{item.strCourseGuid}}" data-examguid="{{item.strExamGuid}}" data-numcomplete="{{item.numComplete}}"></image>
+          <view style='font-size: 32rpx;color: #4c4c4c;margin-left:25rpx;width: 50%;text-overflow: ellipsis;'>
+            <view class='itemName'>{{item.strCourseName}}</view>
+            <view class='itemNameType'>课程类型 {{item.strTypeName}}</view>
+            <view class='itemNameType'>结束日期 {{wxsUtil.subDate(item.dtEndDate)}}</view>
+            <!-- <canvas style='width:100%;height:50rpx;' canvas-id="{{'canvas_'+index}}"></canvas> -->
+            <progress  percent="{{item.numSchedule}}" stroke-width="6"  activeColor="#b6011f" backgroundColor="#f1f1f1" active/>
+            <view style='flex-direction: row;display: flex;'>
+              <view style='width:50%;font-size: 28rpx;'>已学习{{item.numSchedule}}%</view>
+              <block wx:if="{{item.numEndDate >= 0}}"><view style='width:50%;font-size: 28rpx;text-align: right;'>距离结束{{item.numEndDate}}天</view></block>
+              <block wx:if="{{item.numEndDate < 0}}"><view style='width:50%;font-size: 28rpx;text-align: right;'>已结束</view></block>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</page>

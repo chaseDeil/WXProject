@@ -1,0 +1,49 @@
+<import src="/pages/divide.wxml" />
+<wxs src="../../../utils/common.wxs" module="wxsUtil" />
+<scroll-view style='height:{{height*0.92}}px'>
+  <view style='flex-direction: row;display: flex;padding-left:25rpx;padding-top:15rpx;'>
+    <view class='typeLabel'>简答题</view>
+    <view style='margin-left:20rpx;font-size: 34rpx;color:#a4a4a4;'>{{index+1}}/{{objobjList.length}}</view>
+  </view>
+  <view style='padding-left:25rpx;padding-right:25rpx;padding-top:20rpx;padding-bottom:20rpx;font-size: 34rpx;color:#808080;line-height:60rpx;'>
+    {{obj.strQuestionContent}}
+  </view>
+  <template is="line" />
+  <!-- 1，单选、2，多选、3，简答、4，填空 -->
+  <block wx:if="{{obj.numQuestionType == 1||obj.numQuestionType == 2}}">
+    <block wx:for="{{objobjList}}" wx:key="strQuestionGuid">
+      <!-- 显示答案 -->
+      <view wx:if="{{isShowAnswer}}">
+        <!-- 错误答案 -->
+        <view wx:if="{{obj.strUserExerciseAnswer.length != 0 && obj.strUserExerciseAnswer.search(wxsUtil.indexToABCD(index)) != -1 && item.numIsSurefire == 1}}" style='flex-direction: row;display: flex;padding-left:25rpx;padding-top:20rpx;width:100%;font-size: 34rpx;color:#e79e3f;'>
+          <view style='padding-left:20rpx;'>{{wxsUtil.indexToABCD(index)}}</view>
+          <view>{{item.strOptionContent}}</view>
+        </view>
+        <!-- 正确答案 -->
+        <view wx:elif="{{item.numIsSurefire == 2}}" style='flex-direction: row;display: flex;padding-left:25rpx;padding-top:20rpx;width:100%;font-size: 34rpx;color:#68b1f5;'>
+          <view style='padding-left:20rpx;'>{{wxsUtil.indexToABCD(index)}}</view>
+          <view>{{item.strOptionContent}}</view>
+        </view>
+        <!-- 其他答案 -->
+        <view wx:else style='flex-direction: row;display: flex;padding-left:25rpx;padding-top:20rpx;width:100%;font-size: 34rpx;color:#808080;'>
+          <view style='padding-left:20rpx;'>{{wxsUtil.indexToABCD(index)}}</view>
+          <view>{{item.strOptionContent}}</view>
+        </view>
+      </view>
+      <!-- 只有不显示答案的场合，才有点击事件 -->
+      <!-- 不显示答案,但是把之前选过的答案变成蓝色 -->
+      <view wx:elif="{{obj.strUserExerciseAnswer.length != 0 && obj.strUserExerciseAnswer.search(wxsUtil.indexToABCD(index)) != -1}}" style='flex-direction: row;display: flex;padding-left:25rpx;padding-top:20rpx;width:100%;font-size: 34rpx;color:#68b1f5;' bindtap='anwser' data-anwswer='{{wxsUtil.indexToABCD(index)}} '>
+        <view style='padding-left:20rpx; '>{{wxsUtil.indexToABCD(index)}}</view>
+        <view>{{item.strOptionContent}}</view>
+      </view>
+      <!-- 不显示答案,但是把之前没选过的答案变成灰色 -->
+      <view wx:else style='flex-direction: row;display: flex;padding-left:25rpx;padding-top:20rpx;width:100%;font-size: 34rpx;color:#808080; ' bindtap='anwser' data-anwswer='{{wxsUtil.indexToABCD(index)}} '>
+        <view style='padding-left:20rpx; '>{{wxsUtil.indexToABCD(index)}}</view>
+        <view>{{item.strOptionContent}}</view>
+      </view>
+
+    </block>
+  </block>
+  <block wx:if="{{obj.numQuestionType == 3||obj.numQuestionType == 4}}"></block>
+</scroll-view>
+<view style='height:{{height*0.08}}px '></view>

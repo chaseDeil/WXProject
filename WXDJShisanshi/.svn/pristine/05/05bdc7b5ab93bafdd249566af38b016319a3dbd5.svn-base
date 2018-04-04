@@ -1,0 +1,4 @@
+ 
+ <page >
+ <video src="{{url}}" bindended="bindended" controls autoplay id="myVideo" binderror="binderror"></video>
+ </page>

@@ -1,0 +1,45 @@
+{
+  "pages": [
+    "pages/login/welcome",
+    "pages/login/login",
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/web/web",
+    "pages/sanhuiyike/sanhuiyike",
+    "pages/sanhuiyike/sanhuiyikeing",
+    "pages/sanhuiyike/sanhuiyikedetail",
+    "pages/study/mystudy",
+    "pages/study/classDetail",
+    "pages/study/exam/startExam",
+    "pages/study/exam/exam",
+    "pages/study/exam/examResult",
+    "pages/study/practice/practice",
+    "pages/video/videocontrl",
+    "pages/video/videoplayer",
+    "pages/mine/mine",
+    "pages/setting/setting",
+    "pages/setting/aboutUs",
+    "pages/study/finishCourse/finishCourse",
+    "pages/study/practice/myPractice",
+    "pages/study/data/dataInfo",
+    "pages/study/Mydata/myData",
+    "pages/study/exam/myExam",
+    "pages/richeng/richengMain",
+    "pages/richeng/richengAdd",
+    "pages/richeng/richengInfo",
+    "pages/ribao/ribaoList",
+    "pages/ribao/ribaoAdd",
+    "pages/ribao/ribaoInfo",
+    "pages/mine/myProfile",
+    "pages/mine/editProfile",
+    "pages/message/messageList"
+    
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#b6011f",
+    "navigationBarTitleText": "十三师智慧党建云平台",
+    "navigationBarTextStyle": "white",
+    "disableScroll": true
+  }
+}

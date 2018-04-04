@@ -1,0 +1,13 @@
+.typeLabel {
+  display: flex;
+  align-items: center;
+  height: 45rpx;
+  border-width: 2rpx;
+  border-color: #d4d4d4;
+  border-style: solid;
+  border-radius: 30rpx;
+  color: #d4d4d4;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  font-size: 28rpx;
+}

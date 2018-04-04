@@ -1,0 +1,142 @@
+.swiper {
+  height: 400rpx;
+  width: 100%;
+}
+
+.swiper image {
+  height: 100%;
+  width: 100%;
+}
+
+.home_bar {
+  height: 140rpx;
+  width: 100%;
+  flex-direction: row;
+  display: flex;
+}
+
+.home_bar_item {
+  padding-top: 20rpx;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+}
+
+.home_bar_item_hover {
+  padding-top: 20rpx;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  background-color: #f7f7f7;
+}
+
+.home_bar_icon {
+  height: 85rpx;
+  width: 100%;
+}
+
+.home_bar_item_text {
+  width: 100%;
+  text-align: center;
+  font-size: 28rpx;
+  color: #4c4c4c;
+}
+
+.divide0 {
+  margin-top: 20rpx;
+  width: 100%;
+  height: 2rpx;
+  background-color: #f1f1f1;
+}
+
+.divide1 {
+  width: 100%;
+  height: 10rpx;
+  background-color: #f7f7f7;
+}
+
+.divide2 {
+  width: 100%;
+  height: 2rpx;
+  background-color: #f1f1f1;
+}
+
+.xuanchuanzhendi {
+  width: 100%;
+  padding-left: 25rpx;
+  padding-right: 25rpx;
+  padding-top: 20rpx;
+  padding-bottom: 15rpx;
+}
+
+.title {
+  height: 40rpx;
+  width: 100%;
+  display: flex;
+  font-size: 35rpx;
+}
+
+.title image {
+  padding-left: 20rpx;
+  width: 15rpx;
+  height: 40rpx;
+}
+
+.s {
+  width: 80%;
+}
+
+.xuanchuanzhendi_item {
+  width: 100%;
+  padding-left: 25rpx;
+  padding-right: 25rpx;
+  padding-top: 15rpx;
+  padding-bottom: 15rpx;
+  display: flex;
+  font-size: 32rpx;
+}
+
+.content {
+  width: 46%;
+  padding-left: 20rpx;
+  font-size: 35rpx;
+  text-decoration-line: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-right: 10rpx;
+}
+
+.tip {
+  border-width: 2rpx;
+  border-color: #b6011f;
+  border-style: solid;
+  border-radius: 10rpx;
+  color: #b6011f;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  padding-bottom: 5rpx;
+  padding-top: 5rpx;
+}
+
+.bottom_view {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.bottom_view_item {
+  width: 100%;
+  height: 120rpx;
+}
+
+.bottom_view_item_hover {
+  width: 100%;
+  height: 120rpx;
+  background-color: #f7f7f7;
+}
+
+.bottom_view_item image {
+  height: 60rpx;
+  width: 100%;
+}

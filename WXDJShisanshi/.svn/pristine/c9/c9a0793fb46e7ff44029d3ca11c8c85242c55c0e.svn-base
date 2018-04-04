@@ -1,0 +1,59 @@
+<import src="/pages/divide.wxml" />
+<wxs src="../../utils/common.wxs" module="wxsUtil" />
+<page>
+  <view style='width:100%;height:100%'>
+    <block wx:if="{{tab}}">
+      <view class="containt">
+        <view class='header'>
+          <view class="header_item" hover-class='header_item_pressed' bindtap='finishCourse'>{{finishCount}}
+            <view style='font-size: 30rpx;margin-top:5rpx;'>已结束课程</view>
+          </view>
+          <view class="header_item" hover-class='header_item_pressed' bindtap='myPractice'>{{practiceCount}}
+            <view style='font-size: 30rpx;margin-top:5rpx;'>我的练习</view>
+          </view>
+          <view class="header_item" hover-class='header_item_pressed'>{{examCount}}
+            <view style='font-size: 30rpx;margin-top:5rpx;'>我的考试</view>
+          </view>
+          <view class="header_item" hover-class='header_item_pressed'>{{dataCount}}
+            <view style='font-size: 30rpx;margin-top:5rpx;'>我的资料</view>
+          </view>
+        </view>
+        <scroll-view scroll-y="true" scroll-with-animation="true" id="scroll-list">
+          <block wx:for="{{data}}">
+            <template is="study_item" data="{{...item,index}}" />
+            <block wx:if="{{index == data.length-1}}">
+              <template is="divide" />
+            </block>
+          </block>
+        </scroll-view>
+      </view>
+    </block>
+    <block wx:if="{{!tab}}">
+      <scroll-view style='width:100%;height:{{height * 0.9}}px;' scroll-y="true" scroll-with-animation="true" id="scroll-list" bindscrolltoupper="refresh" bindscrolltolower="loadmore">
+        <block wx:for="{{objList}}">
+          <template is="divide" />
+          <view style='flex-direction: row;display:flex;align-items: center;'>
+            <image class='dataCover' src="{{item.strImgUrl}}" binderror="binddataerrorimg" data-guid="{{item.strGuid}}"></image>
+            <view style='width:50%'>
+              <view style='font-size:34rpx;color:#404040'>{{item.strDataName +item.strDataName+item.strDataName}}</view>
+              <view style='font-size:32rpx;color:#808080'>{{wxsUtil.bytesToSize(item.numFileSize)}}</view>
+            </view>
+            <image style='width:30rpx;height:30rpx;' src='/image/ziliaoleixing.png' mode='aspectFit'></image>
+            <view style='width:20%;text-overflow: ellipsis;font-size:28rpx;color:#a4a4a4;overflow:hidden; white-space:nowrap;padding-left:15rpx;padding-right:20rpx'>{{item.strTypeName}}</view>
+          </view>
+        </block>
+      </scroll-view>
+    </block>
+    <template is="line" />
+    <view class="bottom_view">
+      <view style='width:50%;' bindtap='wodexuexi_ll'>
+        <image class="bottm_icon" src='{{wodexuexiicon}}' mode='aspectFit'></image>
+        <view class="{{bottm_item_text1}}">我的学习</view>
+      </view>
+      <view style='width:50%;' bindtap='ziliaoguangchang_ll'>
+        <image class="bottm_icon" src='{{ziliaoguangchangicon}}' mode='aspectFit'></image>
+        <view class="{{bottm_item_text2}}">资料广场</view>
+      </view>
+    </view>
+  </view>
+</page>

@@ -1,0 +1,89 @@
+.typeLabel {
+  display: flex;
+  align-items: center;
+  height: 45rpx;
+  border-width: 2rpx;
+  border-color: #d4d4d4;
+  border-style: solid;
+  border-radius: 30rpx;
+  color: #d4d4d4;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  font-size: 28rpx;
+}
+
+.beforeAndNextBt {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 34rpx;
+  color: #646464;
+}
+
+.beforeAndNextBtPress {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f7f7f7;
+  font-size: 34rpx;
+  color: #646464;
+}
+
+.answerInput {
+  height: 60rpx;
+  border-width: 1rpx;
+  border-color: #f0f0f0;
+  border-style: solid;
+  border-radius: 10rpx;
+  color: #808080;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  background-color: #f7f7f7;
+  font-size: 28rpx;
+  padding: 20rpx;
+}
+
+.okbt {
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  border-width: 2rpx;
+  margin-top: 25rpx;
+  color: #b6011f;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  border-color: #b6011f;
+  border-style: solid;
+  border-radius: 10rpx;
+  padding-left: 40rpx;
+  padding-right: 40rpx;
+  text-align: center;
+}
+
+.okbt_pressed {
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  border-width: 2rpx;
+  margin-top: 25rpx;
+  color: #fff;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  border-color: #b6011f;
+  background-color: #c96c7c;
+  border-style: solid;
+  border-radius: 10rpx;
+  padding-left: 40rpx;
+  padding-right: 40rpx;
+  text-align: center;
+}
+
+.menu_press {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f7f7f7;
+}

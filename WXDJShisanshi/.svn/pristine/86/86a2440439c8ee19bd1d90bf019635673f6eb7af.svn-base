@@ -1,0 +1,7 @@
+/* pages/study/exam/examResult.wxss */
+
+.cover{
+  width: 40%;
+  height: 200rpx;
+  border-radius: 15rpx;
+}

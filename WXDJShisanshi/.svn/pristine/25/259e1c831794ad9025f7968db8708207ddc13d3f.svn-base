@@ -1,0 +1,14 @@
+.item {
+  width: 100%;
+  background-color: #fff;
+  display: flex;
+  flex-flow: row;
+  padding: 25rpx;
+}
+
+image {
+  width: 120rpx;
+  height: 120rpx;
+  border: 0 solid #f00;
+  border-radius: 60rpx;
+}

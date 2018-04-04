@@ -1,0 +1,19 @@
+<!--pages/study/finishCourse/finishCourse.wxml-->
+<view class='page'>
+
+  <scroll-view scroll-y='ture' style='height:100%' class='scrollView'>
+    <view wx:for="{{array}}" style='width:100%' class='cell'>
+      <view style='padding-left:25rpx;padding-right:25rpx;' hover-class="navigator-hover" bindtap='itemClick' data-guid="{{strGuid}}">
+        <view style='flex-direction: row;display: flex;padding-bottom:0rpx;'>
+          <image class="cover" src="{{courseImg}}" binderror="binderrorimg" data-guid="{{strGuid}}">                </image>
+          <view style='font-size: 32rpx;color: #4c4c4c;margin-left:25rpx;margin-top:25rpx;width: 60%;text-overflow: ellipsis;'>
+            <view class='itemName'>课程名 {{strCourseName}}</view>
+            <view class='itemName'>课程类型 {{strTypeName}}</view>
+            <view class='itemName'>结束日期 {{wxsUtil.subDate(dtEndDate)}}         </view>
+            <view class='itemName'>考试得分 {{wxsUtil.subDate(numScores)}}           </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

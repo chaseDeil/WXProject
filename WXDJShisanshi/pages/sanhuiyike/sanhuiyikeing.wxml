@@ -1,0 +1,21 @@
+<!--pages/sanhuiyike/sanhuiyikeing.wxml-->
+<block wx:for="{{meeting_list}}">
+      <navigator url="/pages/sanhuiyike/sanhuiyikedetail" hover-class="navigator-hover" bindtap='gotoSanhuiyikeDetail'>
+        <view class='divide0'></view>
+        <view class='divide1'></view>
+        <view class='divide2'></view>
+        <view style="flex-direction:row;display: flex;padding-top: 5rpx;">
+          <view style="width:80%;">
+            <view class="item_text_title">{{item.title}}</view>
+            <view class="item_text1">召开时间 {{item.time}}</view>
+            <view class="item_text2">负责人 {{item.person}}</view>
+          </view>
+          <view style="width:20%;color: #68b1f5;font-size: 30rpx;text-align: right;margin-right: 20rpx;">进行中</view>
+        </view>
+      </navigator>
+      <block wx:if="{{index == meeting_list.length-1}}">
+        <view class='divide0'></view>
+        <view class='divide1'></view>
+        <view class='divide2'></view>
+      </block>
+    </block>

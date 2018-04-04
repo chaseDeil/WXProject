@@ -1,0 +1,15 @@
+<!--pages/mine/editProfile.wxml-->
+<page>
+  <view class="feedback">
+    <view class="feedback-content">
+      <textarea class="feedback-content-info" bindinput="bindTextAreaChange" placeholder="{{placeholderValue}}" value="{{infoShow}}" maxlength="{{noteMaxLen}}" focus></textarea>
+      <view class="number-limit">
+        <view class="fr">{{noteNowLen}}/{{noteMaxLen}}</view>
+      </view>
+    </view>
+    <view class="saveBtnView">
+      <button class="saveBtn" size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" bindtap="save" hover-class='navigator-hover'>保存</button>
+    </view>
+  </view>
+
+</page>

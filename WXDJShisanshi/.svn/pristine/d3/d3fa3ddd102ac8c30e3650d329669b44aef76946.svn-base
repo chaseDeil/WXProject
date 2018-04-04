@@ -1,0 +1,23 @@
+<!--pages/setting/setting.wxml-->
+<page>
+  <view class='cell'>
+    <view class='item' bindtap='cleanCash'>
+      
+      <text class='itemName'>清除缓存</text>
+    </view>
+    <view class='line'></view>
+    <view class='item' bindtap='aboutUs'>
+      <text class='itemName'>关于我们</text>
+    </view>
+
+  </view>
+  <!-- <view class='cellSingle'>
+    <view class='item'bindtap='setting' >
+      <text class='itemName'>提示音</text>
+    </view>
+  </view> -->
+  <view class="loginBtnView"> 
+  <button class="logoutBtn"  size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" bindtap="logout">退出登录</button> 
+ </view>
+
+</page>

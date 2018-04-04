@@ -1,0 +1,43 @@
+/* pages/study/finishCourse/finishCourse.wxss */
+page {
+  height: 100%;
+}
+
+.scrollView {
+  width: 100%;
+  height: 100%;
+  /* background-color: #f2f2f2; */
+  
+}
+
+.cell {
+  background-color: #fff;
+  /* margin: 20rpx 0rpx; */
+  height: 250rpx; 
+}
+
+.cover {
+  width: 40%;
+  height: 200rpx;
+  margin: 20rpx;
+  border-radius: 15rpx;
+}
+
+.itemName {
+  height: 50rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 34rpx;
+  color: #4c4c4c;
+  margin-top: 20rpx;
+}
+
+.itemNameType {
+  height: 50rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 30rpx;
+  color: #999999;
+}

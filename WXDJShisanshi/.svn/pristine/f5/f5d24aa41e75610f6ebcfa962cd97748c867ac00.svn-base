@@ -1,0 +1,4 @@
+<page >
+  <video src="{{url}}" bindplay="bindplay" bindpause="bindpause" bindtimeupdate="bindtimeupdate"  bindended="bindended" controls autoplay initial-time="{{startpoint}}" id="myVideo" binderror="binderror"></video>
+  
+</page>

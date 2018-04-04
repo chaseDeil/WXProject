@@ -1,0 +1,77 @@
+<wxs src="../../utils/common.wxs" module="wxsUtil" />
+<import src="/pages/divide.wxml" />
+<page>
+  <scroll-view scroll-y="true" scroll-with-animation="true" id="scroll-list">
+    <view class='header' style='width: 100%;height:300rpx;background-image:url("{{obj.strCourseUrl}}");background-repeat:no-repeat;background-size:100% 100% ;text-shadow: 0 0 20rpx #000000;color:#ffffff ;padding-top:80rpx;'>
+      <view style='width:100%;font-size: 34rpx;text-align: center;'>{{obj.strCourseName}}</view>
+      <view style='width:100%;font-size: 34rpx;text-align: center;margin-top:20rpx;'>{{obj.strTypeName}}</view>
+      <view style='width:100%;flex-direction: row;display: flex;margin-top:30rpx;margin-bottom:10rpx'>
+        <view style='width:50%;font-size: 28rpx;text-align: left;margin-left:50rpx;'>已学习{{obj.numSchedule}}%</view>
+        <block wx:if="{{obj.numEndDate >= 0}}">
+          <view style='width:50%;font-size: 28rpx;text-align: right;margin-right:50rpx;'>距离结束{{obj.numEndDate}}天</view>
+        </block>
+        <block wx:if="{{obj.numEndDate < 0}}">
+          <view style='width:50%;font-size: 28rpx;text-align: right;margin-right:50rpx;'>已结束</view>
+        </block>
+      </view>
+
+      <progress style='margin-left:50rpx;margin-right:50rpx;' percent="{{obj.numSchedule}}" stroke-width="6" activeColor="#b6011f" backgroundColor="#f1f1f1" active/>
+
+      <view style='flex-direction: row;display: flex;margin-top:10rpx;'>
+        <view style='width:50%;font-size: 28rpx;text-align: left;margin-left:50rpx;'>开始 {{wxsUtil.subDate(obj.dtStartDate)}}</view>
+        <view style='width:50%;font-size: 28rpx;text-align: right;margin-right:50rpx;'>{{wxsUtil.subDate(obj.dtEndDate)}} 结束</view>
+      </view>
+    </view>
+    <template is="divide" />
+    <view style='flex-direction: row;display: flex;height:130rpx;width:100%;justify-content: center'>
+      <view class="gotoBar" hover-class='gotoBarPressed'>
+        <image class='icon' src='/image/lianxi.png' mode="aspectFill"></image>
+        <view>练习</view>
+      </view>
+      <view style='width:0.3%;background-color:#f1f1f1;'></view>
+      <view class="gotoBar" hover-class='gotoBarPressed' bindtap='gotoExam'>
+        <image class='icon' src='/image/kaoshi.png' mode="aspectFill"></image>
+        <view>考试</view>
+      </view>
+    </view>
+    <template is="line" />
+    <view style='width:100%;font-size:32rpx;color:#4d4d4d;background-color:#f7f7f7;padding-left:20rpx;padding-top:10rpx;padding-bottom:15rpx;'>课程章节 共{{objList.length}}章</view>
+    <block wx:for="{{objList}}">
+      <block wx:if="{{index > 0}}">
+        <template is="divide" />
+      </block>
+      <view style='flex-direction: row;display: flex;width:100%;margin-left:20rpx;margin-right:20rpx;padding-bottom:10rpx;' bindtap='gotostudy' data-index='{{index}}' >
+        <view style='width:73%;'>
+          <view style="font-size:32rpx;margin-top:20rpx;color:#4d4d4d;">第{{index+1}}章 已经学习{{item.numSchedule}}%</view>
+          <view style="display: block;font-size:32rpx;margin-top:10rpx;margin-bottom:10rpx;">{{item.strChapterName}}</view>
+        </view>
+        <block wx:if="{{item.numSchedule == 0}}">
+          <view class="startBt" hover-class='startBtPressed' >开始学习</view>
+        </block>
+        <block wx:if="{{item.numSchedule != 0}}">
+          <view class="startBt" hover-class='startBtPressed' >继续学习</view>
+        </block>
+
+      </view>
+      <block wx:for="{{item.fileInfoList}}">
+        <block wx:if="{{index == 0}}">
+          <template is="line" />
+          <view style='margin-left:20rpx;font-size:28rpx;margin-top:10rpx;color:#4d4d4d;'>章节资料</view>
+        </block>
+        <block wx:if="{{index != 0}}">
+          <view style='margin-left:20rpx;'>
+            <template is="line" />
+          </view>
+        </block>
+        <view style='flex-direction: row;display: flex;width:100%;margin-left:20rpx;margin-right:20rpx;padding-bottom:10rpx;' bindtap='fujianclick' data-fujianid='{{item.strFileGuid}}' data-fujianurl='{{item.strFileUrl}}' data-fujiantype='{{item.strFileExtension}}'>
+          <image style='width:80rpx;height:80rpx;margin-top:20rpx;margin-right:20rpx;' src="/image/lianjie.png"></image>
+          <view style='width:70%;margin-right:20rpx;'>
+            <view style='margin-top: 20rpx;display: block;font-size:30rpx;color:#4d4d4d; overflow: hidden;white-space: nowrap;text-overflow:ellipsis;'>{{item.strFileName}}</view>
+            <view style='margin-top: 10rpx;font-size:30rpx;color:#4d4d4d;'>{{wxsUtil.bytesToSize(item.numFileSize)}}</view>
+          </view>
+          <image style='width:50rpx;height:50rpx;margin-top:20rpx;margin-right:10rpx;' src="/image/dakai.png"></image>
+        </view>
+      </block>
+    </block>
+  </scroll-view>
+</page>

@@ -1,0 +1,68 @@
+<wxs src="../../utils/common.wxs" module="wxsUtil" />
+<import src="/pages/divide.wxml" />
+<view class='parent'>
+<view class='header'>
+  <view class='tipLeft' hover-class='tipLeftPress' bindtap='gotoNew'>新建</view>
+  <image class="arrow rotateRight" mode='aspectFit' src='/image/right_arrow.png' bindtap='beforeMonth'></image>
+  <view style='color:#808080;font-size:34rpx;'>{{title}}</view>
+  <image class="arrow" mode='aspectFit' src='/image/right_arrow.png' bindtap='nextMonth'></image>
+  <view class='tipRight' hover-class='tipRightPress' bindtap='gotoToday'>今天
+    <image style='width:35rpx;height:35rpx;margin-left:10rpx;align-self: center;' src='/image/location_today.png'></image>
+  </view>
+</view>
+<block wx:if="{{isShowCalendar}}">
+  <view style='width:100;display: flex; flex-flow: row; text-align:center;justify-content: space-around;margin-top:10rpx;'>
+    <view class='dayTip'>日</view>
+    <view class='dayTip'>一</view>
+    <view class='dayTip'>二</view>
+    <view class='dayTip'>三</view>
+    <view class='dayTip'>四</view>
+    <view class='dayTip'>五</view>
+    <view class='dayTip'>六</view>
+  </view>
+  <view style='width:100;display: flex; flex-flow: row; align-items:center;flex-wrap:wrap;'>
+    <view style='width:{{107.14285 * days[0].nWeek}}rpx;'></view>
+    <block wx:for='{{days}}'>
+      <view style='width:107.14285rpx;margin-bottom:10rpx;margin-top:10rpx;display:flex;flex-flow:row;justify-content: space-around;position:relative'>
+        <!-- 红框 -->
+        <block wx:if='{{selectedYear == item.cYear && selectedMonth == item.cMonth && selectedDay == item.cDay}}'>
+          <view class='daySelect'>
+            <view style='color:#b6011f;font-size:34rpx;'>{{index + 1}}</view>
+            <view style='color:#b6011f;font-size:28rpx;'>{{item.Term == null ? item.IDayCn:item.Term}}</view>
+          </view>
+        </block>
+        <!-- 红色 -->
+        <block wx:elif='{{todayYear == item.cYear && todayMonth == item.cMonth && todayDay == item.cDay}}'>
+          <view class='dayToday' bindtap='selectDate' bindtap='selectDate' data-year='{{item.cYear}}' data-month='{{item.cMonth}}' data-day='{{item.cDay}}'>
+            <view style='color:#ffffff;font-size:34rpx;'>{{index + 1}}</view>
+            <view style='color:#ffffff;font-size:28rpx;'>{{item.Term == null ? item.IDayCn:item.Term}}</view>
+          </view>
+        </block>
+        <block wx:else>
+          <!-- 灰色 -->
+          <view class='day' bindtap='selectDate' data-year='{{item.cYear}}' data-month='{{item.cMonth}}' data-day='{{item.cDay}}'>
+            <view style='color:#404040;font-size:34rpx;'>{{index + 1}}</view>
+            <view style='color:#d4d4d4;font-size:28rpx;'>{{item.Term == null ? item.IDayCn:item.Term}}</view>
+          </view>
+          <!-- 小红点 -->
+          <block wx:if="{{item.hasPoint}}">
+            <view style='width:10rpx;height:10rpx;background-color:#b6011f;left:80rpx;top:10rpx;position:absolute;'></view>
+          </block>
+        </block>
+      </view>
+    </block>
+  </view>
+</block>
+<view style='width:100%;height:40rpx;padding:10rpx;display:flex;flex-flow: row;' bindtap='CalendarTarget'>
+  <image style='width:100%;height:15rpx;align-self:center;' src='/image/liangdaogang.png' mode='aspectFit'></image>
+</view>
+<template is="line" />
+<scroll-view style='width:100%;height:10rpx;flex-grow:2;background-color:#f7f7f7'>
+  <block wx:for='{{objList}}'>
+    <view style=' display: flex;flex-flow:row;background-color:#ffffff;margin-top:20rpx;padding-left:25rpx;padding-right:25rpx;padding-top:25rpx;padding-bottom:25rpx;align-items:center;' hover-class='navigator-hover' bindtap='gotoDetail' data-index='{{index}}'>
+    <view style='color:#808080;font-size:30rpx;padding-right:25rpx;'>{{wxsUtil.subTime(item.dtScheduleDateStart)}}</view>
+    <view style='color:#404040;font-size:32rpx;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;'>{{item.strScheduleContent}}</view>
+    </view>
+    <template is="line" />
+  </block>
+</scroll-view></view>

@@ -1,0 +1,50 @@
+.swiper-tab {
+  width: 100%;
+  border-bottom: 2rpx solid #f1f1f1;
+  text-align: center;
+  line-height: 80rpx;
+  justify-content: space-around;
+  display: flex;
+}
+
+.swiper-tab-list {
+  font-size: 30rpx;
+  display: inline-block;
+  width: 20%;
+  color: #808080;
+}
+
+.on {
+  color: #b6011f;
+  border-bottom: 5rpx solid #b6011f;
+}
+
+.swiper-box {
+  display: block;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.dataCover {
+  width: 100rpx;
+  height: 100rpx;
+  margin-top: 20rpx;
+  margin-left: 25rpx;
+  margin-right: 20rpx;
+  align-self: flex-start;
+}
+
+.dataItem {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+}
+
+.dataItemPressed {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  background-color: #fafafa;
+}

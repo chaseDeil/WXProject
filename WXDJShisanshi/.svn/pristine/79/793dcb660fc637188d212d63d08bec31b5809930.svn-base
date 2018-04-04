@@ -1,0 +1,20 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/web/web",
+    "pages/sanhuiyike/sanhuiyike",
+    "pages/sanhuiyike/sanhuiyikeing",
+    "pages/sanhuiyike/sanhuiyikedetail",
+    "pages/study/mystudy",
+    "pages/study/classDetail"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#b6011f",
+    "navigationBarTitleText": "十三师智慧党建云平台",
+    "navigationBarTextStyle": "white",
+    "disableScroll": true
+  }
+}

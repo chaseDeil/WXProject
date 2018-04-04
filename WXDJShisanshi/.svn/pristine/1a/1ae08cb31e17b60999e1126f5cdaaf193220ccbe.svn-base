@@ -1,0 +1,13 @@
+<!--pages/setting/aboutUs.wxml-->
+<view class='page'>
+  <view class='logoView'>
+    <image class='logoImg' src='../../image/logo.png' mode='aspectFit'></image>
+    <text class='name'>十三师党建</text>
+  </view>
+  
+  <view class='infoView'>
+    <text class='version'>版本号 V1.0.0</text>
+    <text class='company'>奥远集团 版权所有</text>
+  </view> 
+  
+</view>

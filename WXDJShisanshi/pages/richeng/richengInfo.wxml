@@ -1,0 +1,15 @@
+<wxs src="../../utils/common.wxs" module="wxsUtil" />
+<import src="/pages/divide.wxml" />
+<view style='width:100%;height:{{height}}px;background-color:#f7f7f7'>
+  <template is="divide" />
+  <!-- <view style='width:100%;background-color:#ffffff;padding:25rpx;display:block;' hover-class='navigator-hover' bindtap='callMenu'> -->
+  <view style='width:100%;background-color:#ffffff;padding:25rpx;display:block;' hover-class='navigator-hover'>
+    <view style='color:#404040;font-size:36rpx;width:700rpx;'>{{obj.strScheduleContent}}</view>
+    <view style='color:#808080;font-size:32rpx;margin-top:20rpx;'>{{wxsUtil.subSecond(obj.dtScheduleDateStart + "")}}</view>
+    <view style='color:#808080;font-size:32rpx;'>{{wxsUtil.getRemindType(obj.numScheduleState)}}</view>
+  </view>
+  <template is="line" />
+
+    <view class='flow_bottom' hover-class='flow_bottom_press' bindtap='gotoDelete'><image style='width:70rpx;height:70rpx;margin-top:15rpx;'src='/image/delete.png'></image></view>
+  <view class='flow_bottom2' hover-class='flow_bottom_press2' bindtap='gotoEdit'><image style='width:70rpx;height:70rpx;margin-top:15rpx;'src='/image/edit.png'></image></view>
+</view>

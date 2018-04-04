@@ -1,0 +1,12 @@
+<import src="/pages/divide.wxml" />
+<scroll-view style='height:{{height*0.92}}px'>
+  <view style='flex-direction: row;display: flex;padding-left:25rpx;padding-top:15rpx;'>
+    <view class='typeLabel'>简答题</view>
+    <view style='margin-left:20rpx;font-size: 34rpx;color:#a4a4a4;'>5/456</view>
+  </view>
+  <view style='padding-left:25rpx;padding-right:25rpx;padding-top:20rpx;padding-bottom:20rpx;font-size: 34rpx;color:#808080;'>
+    这里是题目梯米梯米甜蜜提奥斯回复这里是题目梯米梯米甜蜜提奥斯回复这里是题目梯米梯米甜蜜提奥斯回复
+  </view>
+  <template is="line" />
+</scroll-view>
+<view style='height:{{height*0.08}}px'></view>

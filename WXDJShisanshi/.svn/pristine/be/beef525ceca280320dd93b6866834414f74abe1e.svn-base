@@ -1,0 +1,100 @@
+
+const util = require('../../utils/util.js')
+var app = getApp()
+Page({
+  data: {
+    pics: [],
+    array: [],
+    messageCount:0,
+  },
+
+  onLoad: function () {
+    var that = this;
+    util.requestGet('mobileShareNewsAction!getShareNewsListInfo.action', { userId: app.globalData.userId }, function (res) {
+      that.setData({
+        pics: res.data['obj']['jsonArrayImg'],
+        array: res.data['obj']['jsonArrayInfo']
+      })
+    })
+  },
+
+  //下拉刷新
+  onPullDownRefresh: function () {
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+
+    //模拟加载
+    setTimeout(function () {
+      // complete
+      wx.hideNavigationBarLoading() //完成停止加载
+      wx.stopPullDownRefresh() //停止下拉刷新
+    }, 1500);
+  },
+
+  onShow: function() {
+    var that = this;
+    util.requestGet('mobileMessageAction!getMessageCount.action', { userId: app.globalData.userId }, function (res) {
+      that.setData({
+        messageCount: res.data['obj']['count']
+      })
+    })
+  },
+
+  imgClick: function (e) {
+    var index = parseInt(e.currentTarget.dataset.index);
+    console.log(this.data.array[index]['strDetailUrl'])
+    app.globalData.url = this.data.array[index]['strDetailUrl']
+    wx.navigateTo({
+      url: '../web/web'
+    })
+  },
+
+  itemClick: function (e) {
+    var index = parseInt(e.currentTarget.dataset.index);
+    console.log(this.data.array[index]['strDetailUrl'])
+    app.globalData.url = this.data.array[index]['strDetailUrl']
+    wx.navigateTo({
+      url: '../web/web'
+    })
+  },
+
+  gotoSanhuiyike: function (e) {
+    // wx.navigateTo({
+    //   url: '../sanhuiyike/sanhuiyike'
+    // })
+    app.globalData.url = util.baseWebUrl + "renda_web/mobile/mobileMeetingInfoAction.action"
+    wx.navigateTo({
+      url: '../web/web'
+    })
+  },
+  gotoStudy: function (e) {
+    wx.navigateTo({
+      url: '../study/mystudy'
+    })
+  },
+  gotoMine: function (e) {
+    wx.navigateTo({
+      url: '../mine/mine'
+    })
+  },
+  gotoRibao: function (e) {
+    wx.navigateTo({
+      url: '../ribao/ribaoList'
+    })
+  },
+  gotoRicheng: function (e) {
+    wx.navigateTo({
+      url: '../richeng/richengMain'
+    })
+  },
+  gotoQRcode: function (e) {
+    wx.navigateTo({
+      url: '../QRcode/readQrcode'
+    })
+  },
+  gotoMessageList: function (e) {
+    wx.navigateTo({
+      url: '../message/messageList'
+    })
+  },
+})
+

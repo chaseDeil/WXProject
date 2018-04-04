@@ -1,0 +1,117 @@
+// pages/video/videocontrl.js
+var app = getApp()
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    url: '',
+    strCourseGuid:'',
+    strChapterGuid: '',
+    numChapterNumber: '',
+    strCourseEndTime: '',
+    numSchedule: 0,
+    numAlreadyTimeLong:0,
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+
+    var that = this;
+    that.setData({
+      strCourseGuid: options.strCourseGuid,
+      strChapterGuid: options.strChapterGuid,
+      numChapterNumber: options.numChapterNumber,
+      strCourseEndTime: options.strCourseEndTime,
+      numSchedule: options.numSchedule,
+      numAlreadyTimeLong: options.numAlreadyTimeLong,
+    })
+
+    that.setData({
+      url: app.globalData.url,
+    }); 
+    // console.log(that.data.strCourseGuid)
+    // console.log(that.data.strChapterGuid)
+    // console.log(that.data.numChapterNumber)
+    // console.log(that.data.strCourseEndTime)
+    // console.log(that.data.numSchedule)
+
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+    this.videoContext = wx.createVideoContext('myVideo')
+    //恢复播放进度
+    if (this.data.numAlreadyTimeLong != undefined){
+      var start = this.data.numAlreadyTimeLong / 1000
+      this.videoContext.seek(start)
+    }
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+  
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+  
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+  
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+  
+  },
+
+  //开始播放事件回调
+  bindplay:function(e){
+    console.log(e)
+  },
+
+  //暂停播放事件回调
+  bindpause: function (e) {
+    console.log(e)
+  },
+
+  //进度跟踪
+  bindtimeupdate: function (event){
+    // console.log(event.detail.currentTime)
+  },
+
+  //播放完毕，返回
+  bindended: function (event) {
+    wx.navigateBack();
+  }
+})

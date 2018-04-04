@@ -1,0 +1,63 @@
+<import src="/pages/divide.wxml" />
+<page>
+  <view style='width:100%;height:220rpx;display:flex;flex-direction:column;width:100%;height:100%;align-items:center;'>
+    <block wx:if="{{numComplete == 2}}">
+      <!--未考试-->
+      <view style='width:100%;height:220rpx;background-color:#b6011f;color:#ffffff;display:flex;flex-direction:column;align-items:center;'>
+        <view style='margin-top:70rpx;'>未考试</view>
+        <view class="gotoExam">去考试</view>
+      </view>
+    </block>
+    <block wx:if="{{numComplete != 2}}">
+      <!--已考试-->
+      <view style='width:100%;height:220rpx;background-color:#b6011f;color:#ffffff;display:flex;flex-direction:column;align-items:center;'>
+        <view style='margin-top:50rpx;font-size:110rpx;'>90</view>
+        <view style='color:#F2A9B6;margin-top:-15rpx;font-size:34rpx;'>最终得分</view>
+      </view>
+    </block>
+  </view>
+  <canvas canvas-id="myCanvas" style="width:100%;height:60rpx;" />
+  <view style='width:100%;height:100rpx;display:flex;align-items:center;margin-bottom:10rpx;'>
+    <view style='width:33%;text-align: center;'>
+      <view style='font-size:38rpx;color:#242424'>0</view>
+      <view style='font-size:30rpx;color:#a4a4a4'>未做题</view>
+    </view>
+    <view style='width:0.5%;height:60rpx;background-color:#d7d7d7;margin-top:20rpx;margin-bottom:20rpx;'></view>
+    <view style='width:33%;text-align: center;'>
+      <view style='font-size:38rpx;color:#242424'>0</view>
+      <view style='font-size:30rpx;color:#a4a4a4'>答错题</view>
+    </view>
+    <view style='width:0.5%;height:60rpx;background-color:#d7d7d7;margin-top:20rpx;margin-bottom:20rpx;'></view>
+    <view style='width:33%;text-align: center;'>
+      <view style='font-size:38rpx;color:#242424'>0</view>
+      <view style='font-size:30rpx;color:#a4a4a4'>答对题</view>
+    </view>
+  </view>
+  <template is="line" />
+  <view style='background-color:#f4f4f4;width:100%;height:60rpx;color:#a4a4a4;font-size:32rpx;padding-left:20rpx; display:flex;align-items:center;'>考试信息</view>
+  <template is="line" />
+  <view style='margin-left:20rpx;margin-right:20rpx'>
+    <view style='display:flex'>
+      <view>考试时间</view>
+      <view>100分钟</view>
+    </view>
+    <template is="line" />
+    <view style='display:flex;'>
+      <view>考试时间</view>
+      <view>100分钟</view>
+    </view>
+    <template is="line" />
+    <view style='display:flex;'>
+      <view>考试时间</view>
+      <view>100分钟</view>
+    </view>
+    <template is="line" />
+    <view style='display:flex;'>
+      <view>考试时间</view>
+      <view>100分钟</view>
+    </view>
+  </view>
+  <template is="line" />
+  <view style='background-color:#f4f4f4;width:100%;height:60rpx;color:#a4a4a4;font-size:32rpx;padding-left:20rpx; display:flex;align-items:center;'>所属课程</view>
+  <template is="line" />
+</page>

@@ -1,0 +1,27 @@
+<wxs src="../../utils/common.wxs" module="wxsUtil" />
+<import src="/pages/divide.wxml" />
+<scroll-view scroll-y="true" scroll-with-animation="true">
+  <view class='header' style='width: 100%;  height: 300rpx;  background-image: url("{{obj.strCourseUrl}}");background-repeat:round;text-shadow: 0 0 20rpx #000000;color:#ffffff ;padding-top:80rpx;' >
+    <view style='width:100%;font-size: 34rpx;text-align: center;'>{{obj.strCourseName}}</view>
+    <view style='width:100%;font-size: 34rpx;text-align: center;'>{{obj.strTypeName}}</view>
+    <view style='width:100%;flex-direction: row;display: flex;margin-top:50rpx;margin-bottom:10rpx'>
+      <view style='width:50%;font-size: 28rpx;text-align: left;margin-left:50rpx;'>已学习{{obj.numSchedule}}%</view>
+      <block wx:if="{{obj.numEndDate >= 0}}">
+        <view style='width:50%;font-size: 28rpx;text-align: right;margin-right:50rpx;'>距离结束{{obj.numEndDate}}天</view>
+      </block>
+      <block wx:if="{{obj.numEndDate < 0}}">
+        <view style='width:50%;font-size: 28rpx;text-align: right;margin-right:50rpx;'>已结束</view>
+      </block>
+    </view>
+
+    <progress style='margin-left:50rpx;margin-right:50rpx;' percent="{{obj.numSchedule}}" stroke-width="6" activeColor="#b6011f" backgroundColor="#f1f1f1"  active/>
+
+    <view style='flex-direction: row;display: flex;margin-top:10rpx;'>
+      <view style='width:50%;font-size: 28rpx;text-align: left;margin-left:50rpx;'>开始 {{wxsUtil.subDate(obj.dtStartDate)}}</view>
+      <view style='width:50%;font-size: 28rpx;text-align: right;margin-right:50rpx;'>{{wxsUtil.subDate(obj.dtEndDate)}} 结束</view>
+    </view>
+  </view>
+  <template is="divide" />
+  <view style='flex-direction: row;display: flex;margin-top:10rpx;'></view>
+  <template is="divide" />
+</scroll-view>

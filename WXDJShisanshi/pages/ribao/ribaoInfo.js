@@ -1,0 +1,153 @@
+// pages/ribao/ribaoInfo.js
+const util = require('../../utils/util.js')
+var app = getApp()
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    obj: "",
+    height: 0,
+    picList:[],
+    fileList:[],
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    var that = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          height: res.windowHeight
+        })
+      }
+    })
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    var that = this;
+    wx.showLoading({
+      title: '加载中',
+    })
+    util.requestGet('partyDailyAction!getPartyDailyDetails.action', { userId: app.globalData.userId, reportId: app.globalData.passData.strGuid }, function (res) {
+      var l = res.data['obj'].urllist
+      var picList = [];
+      var fileList = [];
+      for (var i = 0; i < l.length; i++) {
+        if (l[i].strFileExtension.toUpperCase() == "JPG" || l[i].strFileExtension.toUpperCase() == "PNG") {
+          //图片
+          picList.push(l[i])
+        } else {
+          //视频
+          fileList.push(l[i])
+        }
+      }
+      that.setData({
+        obj: res.data['obj'],
+        picList: picList,
+        fileList: fileList,
+      })
+      wx.hideLoading()
+    })
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+  
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+  
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+  
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+  
+  },
+
+  //图片预览
+  previewImage: function (e) {
+    var that = this
+    var current = that.data.picList[e.currentTarget.dataset.index].strFileUrl
+    var urls = []
+    for (var i = 0; i < that.data.picList.length; i++) {
+      urls.push(that.data.picList[i].strFileUrl)
+    }
+    wx.previewImage({
+      current: current, // 当前显示图片的http链接
+      urls: urls // 需要预览的图片http链接列表
+    })
+  },
+
+  //图片预览
+  previewVideo: function (e) {
+    var that = this
+    app.globalData.url = that.data.fileList[e.currentTarget.dataset.index].strFileUrl
+    wx.navigateTo({
+      url: '/pages/video/videoplayer',
+    })
+  },
+
+  //删除
+  gotoDelete: function (e) {
+    var that = this
+    wx.showModal({
+      title: '提示',
+      content: '确定删除？',
+      success: function (res) {
+        if (res.confirm) {
+          util.requestGet('partyDailyAction!deltePartyDaily.action', { userId: app.globalData.userId, reportId: that.data.obj.strGuid}, function (res) {
+            wx.navigateBack()
+          }, function (res) {
+            wx.navigateBack()
+          })
+        } 
+      }
+    })
+  },
+
+  //编辑
+  gotoEdit: function (e) {
+    var that = this
+    app.globalData.passData['obj'] = that.data.obj
+    app.globalData.passData['picList'] = that.data.picList
+    app.globalData.passData['fileList'] = that.data.fileList
+    wx.navigateTo({
+      url: '/pages/ribao/ribaoAdd',
+    })
+  },
+})

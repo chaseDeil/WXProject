@@ -1,0 +1,97 @@
+<import src="/pages/divide.wxml" />
+<page>
+  <view style='width:100%;height:220rpx;display:flex;flex-direction:column;width:100%;height:100%;align-items:center;'>
+    <block wx:if="{{numComplete == 2}}">
+      <!--未考试-->
+      <view style='width:100%;height:220rpx;background-color:#b6011f;color:#ffffff;display:flex;flex-direction:column;align-items:center;'>
+        <view style='margin-top:50rpx;'>未考试</view>
+        <view class="gotoExam">去考试</view>
+      </view>
+    </block>
+    <block wx:elif="{{numComplete == 3}}">
+      <view style='width:100%;height:220rpx;background-color:#b6011f;color:#ffffff;display:flex;flex-direction:column;align-items:center;justify-content: center;'>
+        <view style='font-size:60rpx;'>未阅卷</view>
+      </view>
+    </block>
+    <block wx:else>
+      <!--已考试-->
+      <view style='width:100%;height:220rpx;background-color:#b6011f;color:#ffffff;display:flex;flex-direction:column;align-items:center;'>
+        <view style='margin-top:30rpx;font-size:110rpx;'>{{obj.numUserTotalScore}}</view>
+        <view style='color:#F2A9B6;margin-top:-15rpx;font-size:32rpx;'>最终得分</view>
+      </view>
+    </block>
+  </view>
+  <canvas canvas-id="myCanvas" style="width:100%;height:50rpx;" />
+  <view style='width:100%;height:150rpx;display:flex;align-items:center;margin-bottom:10rpx;'>
+    <view style='width:24.9%;text-align: center;'>
+      <view style='font-size:38rpx;color:#242424'>{{obj.numRadioScores}}</view>
+      <view style='font-size:30rpx;color:#a4a4a4'>单选题</view>
+    </view>
+    <view style='width:0.2%;height:60rpx;background-color:#d7d7d7;margin-top:20rpx;margin-bottom:20rpx;'></view>
+    <view style='width:24.8%;text-align: center;'>
+      <view style='font-size:38rpx;color:#242424'>{{obj.numMultipleScores}}</view>
+      <view style='font-size:30rpx;color:#a4a4a4'>多选题</view>
+    </view>
+    <view style='width:0.2%;height:60rpx;background-color:#d7d7d7;margin-top:20rpx;margin-bottom:20rpx;'></view>
+    <view style='width:24.8%;text-align: center;'>
+      <view style='font-size:38rpx;color:#242424'>{{obj.numFillScores}}</view>
+      <view style='font-size:30rpx;color:#a4a4a4'>填空题</view>
+    </view>
+    <view style='width:0.2%;height:60rpx;background-color:#d7d7d7;margin-top:20rpx;margin-bottom:20rpx;'></view>
+    <view style='width:24.9%;text-align: center;'>
+      <view style='font-size:38rpx;color:#242424'>{{obj.numSimpleScores}}</view>
+      <view style='font-size:30rpx;color:#a4a4a4'>简答题</view>
+    </view>
+  </view>
+  <template is="line" />
+  <view style='background-color:#f4f4f4;width:100%;height:60rpx;color:#a4a4a4;font-size:32rpx;padding-left:20rpx; display:flex;align-items:center;'>考试信息</view>
+  <template is="line" />
+  <view style='margin-left:20rpx;margin-right:20rpx'>
+    <view style='display:flex;padding:20rpx;'>
+      <view style='width:50%;font-size:34rpx;color:#242424'>考试时间</view>
+      <view style='width:50%;font-size:32rpx;color:#a4a4a4;text-align: right'>{{obj.numTestTime}}分钟</view>
+    </view>
+    <template is="line" />
+    <view style='display:flex;padding:20rpx;'>
+      <view style='width:50%;font-size:34rpx;color:#242424'>考试题数</view>
+      <view style='width:50%;font-size:32rpx;color:#a4a4a4;text-align: right'>{{obj.numQuestionsNumber}}道题</view>
+    </view>
+    <template is="line" />
+    <view style='display:flex;padding:20rpx;'>
+      <view style='width:50%;font-size:34rpx;color:#242424'>总分数</view>
+      <view style='width:50%;font-size:32rpx;color:#a4a4a4;text-align: right'>{{obj.numTotalScore}}</view>
+    </view>
+    <template is="line" />
+    <view style='display:flex;padding:20rpx;'>
+      <view style='width:50%;font-size:34rpx;color:#242424'>及格分数</view>
+      <view style='width:50%;font-size:32rpx;color:#a4a4a4;text-align: right'>{{obj.numPassScores}}</view>
+    </view>
+  </view>
+  <template is="line" />
+  <view style='background-color:#f4f4f4;width:100%;height:60rpx;color:#a4a4a4;font-size:32rpx;padding-left:20rpx; display:flex;align-items:center;'>所属课程</view>
+  <template is="line" />
+  <view style='padding-left:25rpx;padding-right:25rpx;' hover-class="navigator-hover" bindtap='itemClick' data-guid="{{strGuid}}">
+    <view style="font-size: 34rpx;padding-bottom:10rpx;width:100%;text-overflow: ellipsis;padding-top:10rpx;">{{obj.strCourseName}}</view>
+    <view style='flex-direction: row;display: flex;padding-bottom:25rpx;'>
+      <image class="cover" src="{{strCourseUrl}}" binderror="binderrorimg" data-guid="{{strGuid}}"></image>
+      <view style='font-size: 32rpx;color: #4c4c4c;margin-left:25rpx;width: 60%;text-overflow: ellipsis;'>
+        <view>课程类型 {{obj.strTypeName}}</view>
+        <view>开始日期 {{obj.dtStartDate}}</view>
+        <view>结束日期 {{obj.dtEndDate}}</view>
+        <!-- <canvas style='width:100%;height:50rpx;' canvas-id="{{'canvas_'+index}}"></canvas> -->
+        <progress percent="{{numSchedule}}" stroke-width="6" activeColor="#b6011f" backgroundColor="#f1f1f1" active/>
+        <view style='flex-direction: row;display: flex;'>
+          <view style='width:50%;font-size: 28rpx;'>已学习{{obj.numSchedule}}%</view>
+          <block wx:if="{{obj.numEndDate >= 0}}">
+            <view style='width:50%;font-size: 28rpx;text-align: right;'>距离结束{{obj.numEndDate}}天</view>
+          </block>
+          <block wx:else>
+            <view style='width:50%;font-size: 28rpx;text-align: right;'>已结束</view>
+          </block>
+        </view>
+      </view>
+    </view>
+  </view>
+  <template is="line" />
+  <view style='background-color:#f4f4f4;width:100%;height:100rpx' />
+</page>

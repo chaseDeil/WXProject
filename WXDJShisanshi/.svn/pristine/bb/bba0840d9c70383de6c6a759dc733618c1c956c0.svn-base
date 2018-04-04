@@ -1,0 +1,10 @@
+.dataCover {
+  width: 100rpx;
+  height: 100rpx;
+  margin: 20rpx;
+}
+
+page {
+  height: 100%;
+  background-color: #f7f7f7;
+}

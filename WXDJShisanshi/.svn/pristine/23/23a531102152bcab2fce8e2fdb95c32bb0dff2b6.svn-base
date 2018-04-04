@@ -1,0 +1,218 @@
+// pages/richeng/richengAdd.js
+const util = require('../../utils/util.js')
+var app = getApp()
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    obj: "",
+    height: 0,
+    time: "",
+    date: "",
+    numScheduleState:"",
+    remindType:"",
+    array: ["无提醒", "准时提醒", "提前5分钟提醒", "提前15分钟提醒", "提前30分钟提醒", "提前1小时提醒", "提前2小时提醒", "提前1天提醒", "提前2天提醒"],
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    var that = this;
+    if (app.globalData.passData != null) {
+      this.setData({
+        obj: app.globalData.passData,
+        time: app.globalData.passData.dtScheduleDateStart.substring(11, 16),
+        date: app.globalData.passData.dtScheduleDateStart.substring(0, 10),
+        numScheduleState: app.globalData.passData.numScheduleState,
+        remindType: this.data.array[app.globalData.passData.numScheduleState]
+      });
+      wx.setNavigationBarTitle({ title: '修改日程' })
+    } else {
+      wx.setNavigationBarTitle({ title: '新建日程' })
+    }
+
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          height: res.windowHeight,
+        })
+      }
+    })
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
+  },
+  //2018-02-02 00：00：00 截取年月日
+  subDate: function (val) {
+    return val.substring(0, 10)
+  },
+
+  //2018-02-02 00：00：00 截取时分
+  subTime: function (val) {
+    return val.substring(11, 16)
+  },
+
+  //日期选择框处理
+  bindDateChange:function(e){
+    this.setData({
+      date: e.detail.value
+    });
+  },
+
+  //时间选择框处理
+  bindTimeChange: function (e) {
+    this.setData({
+      time: e.detail.value
+    });
+  },
+
+  //提醒类型选择处理
+  chooesRemindType: function (e) {
+    this.setData({
+      numScheduleState: e.detail.value,
+      remindType: this.data.array[e.detail.value]
+    });
+    console.log(this.data.numScheduleState)
+  },
+
+  getRemindType:function() {
+    var that = this;
+    return 
+  },
+
+  submit: function (e) {
+    var that = this;
+    console.log('form发生了submit事件，携带数据为：', e.detail.value)
+    var obj = e.detail.value;
+    if (obj.contentInput == ""){
+      wx.showToast({
+        title: '请输入日程内容',
+        icon: 'none',
+        duration: 2000
+      });
+      return;
+    }
+    if (obj.timeChoose == "") {
+      wx.showToast({
+        title: '请选择时间',
+        icon: 'none',
+        duration: 2000
+      });
+      return;
+    }
+    if (obj.dateChoose == "") {
+      wx.showToast({
+        title: '请选择日期',
+        icon: 'none',
+        duration: 2000
+      });
+      return;
+    }
+   if (obj.remindTypeChoose.length == 0){
+      wx.showToast({
+        title: '请选择提醒设置',
+        icon: 'none',
+        duration: 2000
+      });
+      return;
+    }
+    //计算实际的提醒时间
+   var strRemindTime = that.getStrRemindTime(obj.dateChoose + " " + obj.timeChoose, obj.remindTypeChoose)
+   console.log("formId:" + e.detail.formId)
+    if (app.globalData.passData != null) {
+      //修改
+      util.requestPost('partyScheduleAction!updateScheduleInfo.action', { userId: app.globalData.userId, strScheduleContent: obj.contentInput, numScheduleState: obj.remindTypeChoose, strRemindTime: strRemindTime, strScheduleDateStart: obj.dateChoose + " " + obj.timeChoose, strpartyScheduleGuid: app.globalData.passData.strGuid, formId: e.detail.formId}, function (res) {
+        wx.navigateBack({
+          delta:2
+        })
+      });
+    }
+    else{
+      //新建
+      util.requestPost('partyScheduleAction!insertScheduleInfo.action', { userId: app.globalData.userId, strScheduleContent: obj.contentInput, numScheduleState: obj.remindTypeChoose, strRemindTime: strRemindTime, strScheduleDateStart: obj.dateChoose + " " + obj.timeChoose, formId: e.detail.formId }, function (res) {
+        wx.navigateBack()
+      });
+    }
+
+  },
+
+  //计算实际的提醒时间 2018-03-19 12:08  
+  getStrRemindTime:function(date,t){
+    var timeList = [0, 0, 5, 15, 30, 60, 120, 1440, 2880]
+    var str = date + ":00";
+    str = str.replace(/-/g, "/");
+    var firstDate = new Date(str);
+    var secondDate = new Date(firstDate.valueOf() - timeList[t] * 60 * 1000);
+    return secondDate.format("yyyy-MM-dd hh:mm")
+  }
+})
+
+Date.prototype.format = function (fmt) {
+  var o = {
+    "M+": this.getMonth() + 1,                 //月份 
+    "d+": this.getDate(),                    //日 
+    "h+": this.getHours(),                   //小时 
+    "m+": this.getMinutes(),                 //分 
+    "s+": this.getSeconds(),                 //秒 
+    "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+    "S": this.getMilliseconds()             //毫秒 
+  };
+  if (/(y+)/.test(fmt)) {
+    fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+  }
+  for (var k in o) {
+    if (new RegExp("(" + k + ")").test(fmt)) {
+      fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    }
+  }
+  return fmt;
+} 

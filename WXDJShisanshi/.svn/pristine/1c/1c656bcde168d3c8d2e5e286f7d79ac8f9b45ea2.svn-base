@@ -1,0 +1,35 @@
+/* pages/mine/editProfile.wxss */
+page {
+  height: 100%;
+}
+
+.feedback-content-info {
+  margin: 20rpx;
+  font-size: 36rpx;
+}
+
+.number-limit {
+  margin: 0rpx 20rpx;
+  text-align: right;
+  color: gray;
+  font-size: 30rpx;
+}
+
+/*按钮*/
+.saveBtnView { 
+  width: 100%; 
+  height: auto; 
+  /* background-color: #c83b2d;  */
+  margin-top: 0rpx; 
+  margin-bottom: 0rpx; 
+  padding-bottom: 0rpx; 
+} 
+  
+.saveBtn { 
+  width: 90%; 
+  margin-left: 5%;
+  margin-top: 70rpx;
+  background-color: #c83b2d;
+  color: #fff;
+  font-size: 38rpx;
+}

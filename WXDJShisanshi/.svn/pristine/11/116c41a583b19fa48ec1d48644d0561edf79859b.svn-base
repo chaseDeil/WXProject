@@ -1,0 +1,72 @@
+<page>
+  <view class="home_page">
+    <swiper class="swiper" indicator-dots="true" autoplay="true" interval="5000" duration="1000" indicator-color="#4d4d4d" indicator-active-color="#b6011f">
+      <block wx:for="{{pics}}" wx:for-index="index">
+        <swiper-item>
+          <image src="{{item.turnImg}}" class="slide-image" mode="aspectFill" bindtap='imgClick' data-index="{{index}}" />
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="home_bar" style="flex-direction:row;">
+      <view class="home_bar_item" id='ll_ribao' hover-class='home_bar_item_hover'>
+        <image class="home_bar_icon" src="/image/ribao.png" mode='aspectFit' />
+        <view class='home_bar_item_text'>日报</view>
+      </view>
+      <view class="home_bar_item" id='ll_richeng' hover-class='home_bar_item_hover'>
+        <image class="home_bar_icon" src="/image/richeng.png" mode='aspectFit' />
+        <view class='home_bar_item_text'>日程</view>
+      </view>
+      <view class="home_bar_item" id='ll_kaoqin' hover-class='home_bar_item_hover'>
+        <image class="home_bar_icon" src="/image/kaoqin.png" mode='aspectFit' />
+        <view class='home_bar_item_text'>考勤</view>
+      </view>
+      <view class="home_bar_item" id='ll_qingxiujia' hover-class='home_bar_item_hover'>
+        <image class="home_bar_icon" src="/image/shenpi.png" mode='aspectFit' />
+        <view class='home_bar_item_text'>请休假</view>
+      </view>
+    </view>
+    <view class='divide0'></view>
+    <view class='divide1'></view>
+    <view class='divide2'></view>
+    <view class='xuanchuanzhendi'>
+      <view class='title'>
+        <view class='s'>宣传阵地</view>
+        <view>更多</view>
+        <image src="/image/right_arrow.png" mode='aspectFit'></image>
+      </view>
+    </view>
+    <view class='xuanchuanzhendi_item' wx:for="{{array}}" bindtap='itemClick' data-index="{{index}}">
+      <block wx:if="{{index < 5}}">
+        <view class='tip'> {{item.strTypeName}}</view>
+        <view class='content'> {{item.strNewsTitle}}</view>
+        <view> {{item.dtSendTime}}</view>
+      </block>
+    </view>
+
+    <view class='bottom_view'>
+      <view class='divide2'></view>
+      <view style='display: flex;padding-top:5px;'>
+        <view class="bottom_view_item" id='ll_ribao' hover-class='bottom_view_item_hover'>
+          <image class="bottom_view_icon" src="/image/shouye.png" mode='aspectFit' />
+          <view class='home_bar_item_text'>首页</view>
+        </view>
+        <!-- <view class="bottom_view_item" id='ll_richeng' hover-class='bottom_view_item_hover'>
+          <image class="bottom_view_icon" src="/image/fanghuiju.png" mode='aspectFit' />
+          <view class='home_bar_item_text'>访惠聚</view>
+        </view> -->
+        <view class="bottom_view_item" id='ll_kaoqin' hover-class='bottom_view_item_hover' bindtap='gotoSanhuiyike'>
+          <image class="bottom_view_icon" src="/image/sanhuiyike.png" mode='aspectFit' />
+          <view class='home_bar_item_text'>三会一课</view>
+        </view>
+        <view class="bottom_view_item" id='ll_qingxiujia' hover-class='bottom_view_item_hover' bindtap='gotoStudy'>
+          <image class="bottom_view_icon" src="/image/wodexuexi.png" mode='aspectFit' />
+          <view class='home_bar_item_text'>学习</view>
+        </view>
+        <view class="bottom_view_item" id='ll_qingxiujia' hover-class='bottom_view_item_hover' bindtap='gotoMine'>
+          <image class="bottom_view_icon" src="/image/wode.png" mode='aspectFit' />
+          <view class='home_bar_item_text'>我的</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</page>

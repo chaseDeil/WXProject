@@ -1,0 +1,6 @@
+var subDate = function (val) {
+  return val.substring(0, 10)
+}
+module.exports = {
+  subDate: subDate
+}

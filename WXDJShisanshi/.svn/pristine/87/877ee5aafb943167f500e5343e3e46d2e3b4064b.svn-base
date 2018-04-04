@@ -1,0 +1,74 @@
+<!--pages/mine/myProfile.wxml-->
+<page>
+  <scroll-view class='mineScrollView' scroll-y="true" scroll-with-animation="true" id="scroll-list">
+    <view class='topView' bindtap='chosePic'>
+      <view class='nameText'>头像</view>
+      <image class='headerImg' mode='aspectFit' src='{{headerImg}}'></image>
+
+    </view>
+
+    <view class='centerView'>
+      <view class='cell' bindtap='editName'>
+        <view class='infoName'>姓名</view>
+        <view class='infoText'>奥远·王冰</view>
+      </view>
+      <view class='line'></view>
+      <view class='cell' bindtap='editSex'>
+        <view class='infoName'>性别</view>
+        <view class='infoText'>女</view>
+      </view>
+      <view class='line'></view>
+      <view class='cell' bindtap='editBirth'>
+        <view class='infoName'>生日</view>
+        <view class="section">
+          <picker mode="date" value="{{dates}}"  bindchange="bindDateChange">
+            <view class="picker">
+              {{dates}}
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class='line'></view>
+      <view class='cell' bindtap='editEmail'>
+        <view class='infoName'>邮箱</view>
+        <view class='infoText'>23445646324@qq.com</view>
+      </view>
+    </view>
+
+    <view class='centerView'>
+      <view class='cell' bindtap='editAddress'>
+        <view class='infoName'>所在地</view>
+        <view class='infoText'>辽宁省大连市</view>
+      </view>
+      <view class='line'></view>
+      <view class='cell' bindtap='editMood'>
+        <view class='infoName'>签名</view>
+        <view class='infoText'>学习十九大精神江东父老时代峰峻的史莱克</view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="animation-element-wrapper" animation="{{animation}}" style="visibility:{{show ? 'visible':'hidden'}}" bindtap="hiddenFloatView" data-id="444">
+     <view class="animation-element" catchtap="nono">
+        <text class="left-bt" catchtap="hiddenFloatView" data-id="555">取消</text>
+        <text class="right-bt" catchtap="hiddenFloatView" data-id="666">确定</text>
+          <view class="line"></view> 
+
+        <picker-view indicator-style = "height: 50rpx;"  bindchange="bindChange" catchtap="nono">
+        <!--省-->
+        <picker-view-column>
+           <view wx:for="{{provinces}}" wx:for-item="sheng" wx:key="">
+             {{sheng.ProvinceName}}
+          </view>
+        </picker-view-column>
+        <!--地级市-->
+        <picker-view-column>
+          <view wx:for="{{citys}}" wx:key="">
+            {{item.CityName}}
+          </view>
+        </picker-view-column>
+        </picker-view>
+    </view>
+  </view>
+
+</page>

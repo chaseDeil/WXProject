@@ -1,0 +1,20 @@
+.header{
+  width: 100%;
+  background-color: #ffffff;
+  color:#808080;
+  font-size: 34rpx;
+  padding-left: 25rpx;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+
+.img {
+  width: 120rpx;
+  height: 120rpx;
+  border: 0 solid #f00;
+  border-radius: 20rpx;
+  align-self: center;
+  justify-content: center;
+  margin-left: 15rpx;
+  margin-right: 15rpx;
+}

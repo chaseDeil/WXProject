@@ -1,0 +1,37 @@
+<wxs src="../../utils/common.wxs" module="wxsUtil" />
+<import src="/pages/divide.wxml" />
+<view style='width:100%;height:{{height}}px;background-color:#f7f7f7;'>
+  <form report-submit='true' bindsubmit='submit'>
+    <template is="divide" />
+    <view style='background-color:#ffffff;width:100%;display:flex;flex-flow:row;'>
+      <view style='width:18%;font-size:32rpx;color:#808080;margin:25rpx;'>日程內容</view>
+      <textarea style='width:72%;font-size:32rpx;color:#404040;margin-top:25rpx;margin-right:25rpx;margin-bottom:25rpx;' maxlength='500' auto-height value='{{obj.strScheduleContent}}' name='contentInput'></textarea>
+    </view>
+    <template is="divide" />
+    <picker mode="date" value='{{date}}' bindchange="bindDateChange" name='dateChoose'>
+      <view style='background-color:#ffffff;width:100%;display:flex;flex-flow:row;'>
+        <view style='width:18%;font-size:32rpx;color:#808080;margin:25rpx;'>日期</view>
+        <view class='tv'>{{date}}</view>
+        <image style='width:35rpx;height:35rpx;margin-left:10rpx;align-self:center;margin-right:25rpx;' src='/image/right_arrow.png' mode='aspectFit'></image>
+      </view>
+    </picker>
+    <template is="line" />
+    <picker mode="time" value='{{time}}' bindchange="bindTimeChange" name="timeChoose">
+      <view style='background-color:#ffffff;width:100%;display:flex;flex-flow:row;'>
+        <view style='width:18%;font-size:32rpx;color:#808080;margin:25rpx;'>时间</view>
+        <view class='tv'>{{time}}</view>
+        <image style='width:35rpx;height:35rpx;margin-left:10rpx;align-self:center;margin-right:25rpx;' src='/image/right_arrow.png' mode='aspectFit'></image>
+      </view>
+    </picker>
+    <template is="divide" />
+    <picker mode="selector" value='{{numScheduleState}}' bindchange="chooesRemindType" range='{{array}}' name='remindTypeChoose'>
+      <view style='background-color:#ffffff;width:100%;display:flex;flex-flow:row;'>
+        <view style='width:18%;font-size:32rpx;color:#808080;margin:25rpx;'>提醒设置</view>
+        <view class='tv'>{{remindType}}</view>
+        <image style='width:35rpx;height:35rpx;margin-left:10rpx;align-self:center;margin-right:25rpx;' src='/image/right_arrow.png' mode='aspectFit'></image>
+      </view>
+    </picker>
+    <template is="line" />
+    <button  class='bottomView' hover-class='navigator-hover' formType="submit">确定</button >
+  </form>
+</view>

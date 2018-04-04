@@ -1,0 +1,34 @@
+
+<wxs src="../utils/common.wxs" module="wxsUtil" />
+<template name="divide">
+  <view class='divide0' style='width: 100%;height: 2rpx; background-color: #f1f1f1;'></view>
+  <view class='divide1' style=' width: 100%;height: 10rpx; background-color: #f7f7f7;'></view>
+  <view class='divide2' style=' width: 100%;  height: 2rpx;  background-color: #f1f1f1;  margin-bottom: 10rpx;'></view>
+</template>
+
+<template name="line">
+  <view class='divide0' style='width: 100%;height: 3rpx; background-color: #f1f1f1;'></view>
+</template>
+
+<template name="study_item">
+  <template is="divide" />
+  <view style='padding-left:25rpx;padding-right:25rpx;' hover-class="navigator-hover" bindtap='itemClick' data-guid="{{strGuid}}">
+    <view style="font-size: 34rpx;padding-bottom:10rpx;width:100%;text-overflow: ellipsis;">{{strCourseName}}</view>
+    <view style='flex-direction: row;display: flex;padding-bottom:25rpx;'>
+      <image class="cover" src="{{strCourseUrl}}"></image>
+      <view style='font-size: 32rpx;color: #4c4c4c;margin-left:25rpx;width: 60%;text-overflow: ellipsis;'>
+        <view>课程类型 {{strTypeName}}</view>
+        <view>开始日期 {{wxsUtil.subDate(dtStartDate)}}</view>
+        <view>结束日期 {{wxsUtil.subDate(dtEndDate)}}</view>
+        <!-- <canvas style='width:100%;height:50rpx;' canvas-id="{{'canvas_'+index}}"></canvas> -->
+        <progress  percent="{{numSchedule}}" stroke-width="6"  activeColor="#b6011f" backgroundColor="#f1f1f1" active/>
+        <view style='flex-direction: row;display: flex;'>
+          <view style='width:50%;font-size: 28rpx;'>已学习{{numSchedule}}%</view>
+          <block wx:if="{{numEndDate >= 0}}"><view style='width:50%;font-size: 28rpx;text-align: right;'>距离结束{{numEndDate}}天</view></block>
+          <block wx:if="{{numEndDate < 0}}"><view style='width:50%;font-size: 28rpx;text-align: right;'>已结束</view></block>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+

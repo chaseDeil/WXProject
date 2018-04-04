@@ -1,0 +1,12 @@
+<wxs src="../../utils/common.wxs" module="wxsUtil" />
+<scroll-view style='width:100%;height:{{height}}px;background-color:#f7f7f7' scroll-y='true'>
+  <block wx:for='{{objList}}'>
+    <view style='width:100%'>
+      <view class='tv_time'>{{wxsUtil.subSecond(item.dtModifyTime)}}</view>
+      <view class='label' hover-class='label_press'  bindtap='itemClick' data-index='{{index}}'>
+        <view class='title'>{{item.strTitle}}</view>
+         <rich-text nodes='{{item.strContent}}' class='content'></rich-text> 
+      </view>
+    </view>
+  </block>
+</scroll-view>

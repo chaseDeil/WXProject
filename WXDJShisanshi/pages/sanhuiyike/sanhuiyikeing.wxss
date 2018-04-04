@@ -1,0 +1,47 @@
+/* pages/sanhuiyike/sanhuiyikeing.wxss */
+.divide0 {
+  width: 100%;
+  height: 2rpx;
+  background-color: #f1f1f1;
+}
+
+.divide1 {
+  width: 100%;
+  height: 10rpx;
+  background-color: #f7f7f7;
+}
+
+.divide2 {
+  width: 100%;
+  height: 2rpx;
+  background-color: #f1f1f1;
+  margin-bottom: 10rpx;
+}
+
+.item_text1 {
+  margin-left: 30rpx;
+  color: #a1a1a1;
+  width: 100%;
+  font-size: 30rpx;
+  margin-top: 2rpx;
+  margin-bottom: 2rpx;
+  display: flex;
+}
+
+.item_text2 {
+  margin-left: 30rpx;
+  margin-bottom: 20rpx;
+  color: #a1a1a1;
+  width: 100%;
+  font-size: 30rpx;
+  margin-top: 2rpx;
+  display: flex;
+}
+
+.item_text_title {
+  margin-left: 30rpx;
+  margin-top: 6rpx;
+  margin-bottom: 2rpx;
+  display: flex;
+  font-size: 34rpx;
+}

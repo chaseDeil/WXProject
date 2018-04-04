@@ -1,0 +1,160 @@
+const util = require('../../utils/util.js')
+var app = getApp()
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    guid: "",
+    obj: "",
+    objList: ""
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    var that = this;
+    that.setData({
+      guid: options.guid
+    })
+    util.requestGet('learnManagementAction!learnCourseInfo.action', { userId: app.globalData.userId, strCourseGuid: options.guid }, function (res) {
+      that.setData({
+        obj: res.data['obj'],
+        objList: res.data['objList']
+      })
+    });
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    // util.requestGet('learnManagementAction!learnCourseInfo.action', { userId: app.globalData.userId, strCourseGuid: options.guid }, function (res) {
+    //   that.setData({
+    //     obj: res.data['obj'],
+    //     objList: res.data['objList']
+    //   })
+    // });
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
+  },
+
+  //学习课程
+  gotostudy: function (event) {
+    var that = this;
+    console.log(event.currentTarget.dataset.index);
+    var obj = that.data.objList[event.currentTarget.dataset.index];
+    if (obj.strFileExtension.toLowerCase() == "mp4"){
+      app.globalData.url = obj['strLibraryUrl'];
+      wx.navigateTo({
+        url: '/pages/video/videocontrl?' + "strCourseGuid=" + that.data.obj.strGuid + "&strChapterGuid=" + obj.strChapterGuid + "&numChapterNumber=" + that.data.objList.length + "&strCourseEndTime=" + that.data.obj.dtEndDate + "&numSchedule=" + obj.numSchedule + "&numAlreadyTimeLong=" + obj.numAlreadyTimeLong , 
+      })
+    }
+
+    if (obj.strFileExtension.toLowerCase() == "pdf") {
+
+    }
+  },
+
+
+  //查看附件
+  fujianclick: function (event) {
+    // console.log(event.currentTarget.dataset.fujianid)
+    // console.log(event.currentTarget.dataset.fujianurl)
+    // console.log(event.currentTarget.dataset.fujiantype)
+    var that = this;
+    var strChapterGuid = "";
+    for (var i = 0; i < that.data.objList.length; i++) {
+      var obj = that.data.objList[i];
+      for (var j = 0; j < obj.fileInfoList.length; j++) {
+        var f = obj.fileInfoList[j];
+        if (f.strFileGuid == event.currentTarget.dataset.fujianid) {
+          strChapterGuid = obj.strChapterGuid;
+          break;
+        }
+      }
+      if (strChapterGuid != "") {
+        break
+      }
+    }
+    // console.log("strCourseGuid:" + that.data.obj.strGuid)
+    // console.log("strChapterGuid:" + strChapterGuid)
+
+    //调用文件浏览计数
+    util.requestGet('learnManagementAction!downLoadFile.action', { userId: app.globalData.userId, strCourseGuid: that.data.obj.strGuid, strChapterGuid: strChapterGuid, strFileGuid: event.currentTarget.dataset.fujianid }, null, function (res) {
+      console.log("提交文件计数失败")
+    });
+    wx.showLoading({
+      title: '文件加载中',
+      mask:true,
+    })
+
+    //下载文档
+    wx.downloadFile({
+      url: event.currentTarget.dataset.fujianurl,
+      success: function (res) {
+        var path = res.tempFilePath;
+        // console.log("path:" + path);
+        //打开文档
+        wx.openDocument({
+          fileType: event.currentTarget.dataset.fujiantype,
+          filePath: path,
+          success: function (res) {
+            console.log("文档打开成功");
+          },
+          fail: function (res) {
+            console.log(res);
+          }
+        })
+      },
+      fail: function (res) {
+        console.log(res);
+      },
+      complete: function (res) {
+        wx.hideLoading()
+      }
+    })
+  },
+})

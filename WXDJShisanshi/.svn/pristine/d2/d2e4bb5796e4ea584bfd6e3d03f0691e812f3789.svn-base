@@ -1,0 +1,44 @@
+<import src="/pages/divide.wxml" />
+<page>
+<view style='width:100%;height:100%'>
+  <block wx:if="{{tab}}">
+    <view class="containt">
+      <view class='header'>
+        <view class="header_item" hover-class='header_item_pressed'>{{finishCount}}
+          <view style='font-size: 30rpx;margin-top:5rpx;'>已结束课程</view>
+        </view>
+        <view class="header_item" hover-class='header_item_pressed'>{{practiceCount}}
+          <view style='font-size: 30rpx;margin-top:5rpx;'>我的练习</view>
+        </view>
+        <view class="header_item" hover-class='header_item_pressed'>{{examCount}}
+          <view style='font-size: 30rpx;margin-top:5rpx;'>我的考试</view>
+        </view>
+        <view class="header_item" hover-class='header_item_pressed'>{{dataCount}}
+          <view style='font-size: 30rpx;margin-top:5rpx;'>我的资料</view>
+        </view>
+      </view>
+      <scroll-view scroll-y="true" scroll-with-animation="true" id="scroll-list">
+        <block wx:for="{{data}}">
+          <template is="study_item" data="{{...item,index}}" />
+          <block wx:if="{{index == data.length-1}}">
+            <template is="divide" />
+          </block>
+        </block>
+      </scroll-view>
+    </view>
+  </block>
+  <block wx:if="{{!tab}}">
+    <view class="containt">222</view>
+  </block>
+  <template is="line" />
+  <view class="bottom_view">
+    <view style='width:50%;' bindtap='wodexuexi_ll'>
+      <image class="bottm_icon" src='{{wodexuexiicon}}' mode='aspectFit'></image>
+      <view class="{{bottm_item_text1}}">我的学习</view>
+    </view>
+    <view style='width:50%;' bindtap='ziliaoguangchang_ll'>
+      <image class="bottm_icon" src='{{ziliaoguangchangicon}}' mode='aspectFit'></image>
+      <view class="{{bottm_item_text2}}">资料广场</view>
+    </view>
+  </view>
+</view></page>

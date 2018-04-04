@@ -1,0 +1,8 @@
+.tv {
+  align-self: center;
+  flex-grow: 1;
+  font-size: 32rpx;
+  color: #404040;
+  text-align: right;
+  margin-right: 20rpx;
+}

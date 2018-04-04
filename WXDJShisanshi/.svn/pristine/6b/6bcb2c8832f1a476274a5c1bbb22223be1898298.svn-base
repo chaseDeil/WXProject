@@ -1,0 +1,81 @@
+<!--pages/mine/myProfile.wxml-->
+<page>
+  <scroll-view class='mineScrollView' scroll-y="true" scroll-with-animation="true" id="scroll-list">
+    <view class='topView' bindtap='chosePic' hover-class='navigator-hover'>
+      <view class='nameText'>头像</view>
+      <image class='headerImg' mode='aspectFit' src='{{showData.face}}'></image>
+
+    </view>
+
+    <view class='centerView'>
+      <view class='cell' bindtap='editName' hover-class='navigator-hover'>
+        <view class='infoName'>姓名</view>
+        <view class='infoText'>{{showData.username === null ? '' : showData.username}}</view>
+      </view>
+      <view class='line'></view>
+      <view class='cell' bindtap='editSex' hover-class='navigator-hover'>
+        <view class='infoName'>性别</view>
+        <view class='infoText'>{{showData.sex == 0 ? '女' : '男'}}</view>
+      </view>
+      <view class='line'></view>
+      <view class='cell' bindtap='editBirth' >
+        <view class='infoName'>生日</view>
+        
+         <view class="section">
+          <picker mode="date" value="{{dates}}"  bindchange="bindDateChange">
+            <view class="picker">
+              {{dates}}
+            </view>
+          </picker>
+        </view> 
+      </view>
+      <view class='line'></view>
+      <view class='cell' bindtap='editEmail' hover-class='navigator-hover'>
+        <view class='infoName'>邮箱</view>
+        <view class='infoText'>{{showData.email === null ? '' : showData.email}}</view>
+      </view>
+    </view>
+
+    <view class='centerView'>
+      <view class='cell' bindtap='editAddress' hover-class='navigator-hover'>
+        <view class='infoName'>所在地</view>
+        <view class='infoText'>{{showData.location === null ? '' : showData.location}}</view>
+      </view>
+      <view class='line'></view>
+      <view class='cell' bindtap='editMood' hover-class='navigator-hover'>
+        <view class='infoName'>签名</view>
+        <view class='infoText'>{{showData.mood === null ? '' : showData.mood}}</view>
+      </view>
+    </view>
+
+    <view class="saveBtnView">
+      <button class="saveBtn" size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" bindtap="save" hover-class='navigator-hover'>保存</button>
+    </view>
+  </scroll-view>
+
+  <block wx:if="{{show}}">
+    <view class="animation-element-wrapper" animation="{{animation}}"  bindtap="hiddenFloatView" data-id="444">
+     <view class="animation-element" catchtap="nono">
+        <text class="left-bt" catchtap="hiddenFloatView" data-id="555">取消</text>
+        <text class="right-bt" catchtap="hiddenFloatView" data-id="666">确定</text>
+          <view class="lineH"></view> 
+
+        <picker-view indicator-style = "height: 50rpx;"  bindchange="bindChange" catchtap="nono" value="{{value}}">
+        <!--省-->
+        <picker-view-column>
+           <view wx:for="{{provinces}}" wx:for-item="sheng" wx:key="">
+             {{sheng.ProvinceName}}
+          </view>
+        </picker-view-column>
+        <!--地级市-->
+        <picker-view-column>
+          <view wx:for="{{citys}}" wx:key="">
+            {{item.CityName}}
+          </view>
+        </picker-view-column>
+        </picker-view>
+    </view>
+  </view>
+  </block>
+  <!-- style="visibility:{{show ? 'visible':'hidden'}}" -->
+</page>

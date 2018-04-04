@@ -1,0 +1,59 @@
+<wxs src="../../utils/common.wxs" module="wxsUtil" />
+<import src="/pages/divide.wxml" />
+<view style='width:100%;height:{{height}}px;background-color:#f7f7f7;'>
+  <form report-submit='true' bindsubmit='submit'>
+
+    <template is="divide" />
+    <picker mode="date" value='{{date}}' bindchange="bindDateChange" name='dateChoose'>
+      <view style='background-color:#ffffff;width:100%;display:flex;flex-flow:row;'>
+        <view style='width:18%;font-size:32rpx;color:#808080;margin:25rpx;'>日报日期</view>
+        <view class='tv'>{{date}}</view>
+        <image style='width:35rpx;height:35rpx;margin-left:10rpx;align-self:center;margin-right:25rpx;' src='/image/right_arrow.png' mode='aspectFit'></image>
+      </view>
+    </picker>
+
+    <template is="divide" />
+    <view style='background-color:#ffffff;width:100%;display:flex;flex-flow:row;'>
+      <view style='width:18%;font-size:32rpx;color:#808080;margin:25rpx;'>日报內容</view>
+      <textarea style='width:72%;font-size:32rpx;color:#404040;margin-top:25rpx;margin-right:25rpx;margin-bottom:25rpx;' maxlength='500' auto-height value='{{obj.strDailyContent}}' name='contentInput'></textarea>
+    </view>
+    <template is="divide" />
+    <view style='background-color:#ffffff;width:100%;display:flex;flex-flow:row;' bindtap='choosePic'>
+      <view style='width:18%;font-size:32rpx;color:#808080;margin:25rpx;flex-grow:1;'>图片</view>
+      <image style='width:40rpx;height:40rpx;margin-left:10rpx;align-self:center;margin-right:35rpx;' src='/image/shangchuantupian.png' mode='aspectFit'></image>
+    </view>
+    <template is="line" />
+    <block wx:if='{{picList.length > 0}}'>
+      <scroll-view style='width:100%;height:160rpx;background-color:#ffffff' scroll-x='true'>
+        <view style='width:100%;display:flex;flex-flow:row'>
+          <block wx:for='{{picList}}'>
+            <view style='width:160rpx;height:160rpx;display:flex;position:relative'>
+              <image class='img' src="{{item.strFileUrl}}" bindtap='previewImage' data-index='{{index}}'></image>
+              <image style='width:40rpx;height:40rpx;position:absolute;top:10rpx;right:10rpx;' src='/image/shanchu.png' bindtap='picDelete' data-index='{{index}}'></image>
+            </view>
+          </block>
+        </view>
+      </scroll-view>
+    </block>
+    <template is="divide" />
+    <view style='background-color:#ffffff;width:100%;display:flex;flex-flow:row;' bindtap='chooseVideo'>
+      <view style='width:18%;font-size:32rpx;color:#808080;margin:25rpx;flex-grow:1;'>视频</view>
+      <image style='width:50rpx;height:50rpx;margin-left:10rpx;align-self:center;margin-right:35rpx;' src='/image/shangchuanshipin.png' mode='aspectFit'></image>
+    </view>
+    <template is="line" />
+    <block wx:for='{{fileList}}'>
+      <view style='width: 100%;background-color:#fff; display:flex;flex-flow:row;padding-left:25rpx;padding-top:20rpx;padding-bottom:20rpx;'>
+        <image style='width: 80rpx; height: 80rpx;' mode='aspectFit' src='/image/shipin.png' bindtap='previewVideo' data-index='{{index}}' ></image>
+        <view style='width:520rpx;padding-left:25rpx;' bindtap='previewVideo' data-index='{{index}}'>
+          <view style='color:#202020;font-size:34rpx;'>{{item.strFileName}}</view>
+          <view style='color:#808080;font-size:32rpx;'>{{wxsUtil.bytesToSize(item.numFileSize)}}</view>
+        </view>
+         <image style='align-self:center;width:50rpx;height:50rpx;' src='/image/shanchu.png'  mode='aspectFit' bindtap='videoDelete' data-index='{{index}}'/>
+      </view>
+      <template is="line" />
+    </block>
+
+    <template is="line" />
+    <button class='bottomView' hover-class='navigator-hover' formType="submit">确定</button>
+  </form>
+</view>

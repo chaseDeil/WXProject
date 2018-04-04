@@ -1,0 +1,46 @@
+
+//2018-02-02 00：00：00 截取年月日
+var subDate = function (val) {
+  return val.substring(0, 10)
+}
+
+//2018-02-02 00：00：00 截取时分
+var subTime = function (val) {
+  return val.substring(11, 16)
+}
+
+//2018-02-02 00：00：00 去掉秒
+var subSecond = function (val) {
+  return val.substring(0, 16)
+}
+
+//字节数转换
+var bytesToSize = function (bytes) {
+  if (bytes === 0) return '0 B';
+  var k = 1024;
+  sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+  i = Math.floor(Math.log(bytes) / Math.log(k));
+  r = (bytes / Math.pow(k, i))
+  return r.toPrecision(4) + ' ' + sizes[i];
+}
+
+//数字转换成ABCD
+var indexToABCD = function (index) {
+  var ABCD = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R','S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+  return ABCD[index];
+}
+
+//获取提醒类型文字
+var getRemindType = function (index) {
+  var ABCD = ["无提醒", "准时提醒", "提前5分钟提醒", "提前15分钟提醒", "提前30分钟提醒", "提前1小时提醒", "提前2小时提醒", "提前1天提醒", "提前2天提醒"];
+  return ABCD[index];
+}
+
+module.exports = {
+  subSecond:subSecond,
+  getRemindType:getRemindType,
+  subTime: subTime,
+  subDate: subDate,
+  bytesToSize:bytesToSize,
+  indexToABCD:indexToABCD
+}

@@ -1,0 +1,55 @@
+.icon {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.gotoBar {
+  width: 49.8%;
+  text-align: center;
+  font-size: 28rpx;
+  color: #4c4c4c;
+  padding-top: 20rpx;
+}
+
+.gotoBarPressed {
+  width: 49.8%;
+  text-align: center;
+  font-size: 28rpx;
+  color: #4c4c4c;
+  padding-top: 20rpx;
+  background-color: #f7f7f7;
+}
+
+.startBt {
+  display: flex;
+  align-items: center;
+  margin-top: 20rpx;
+  height: 55rpx;
+  border-width: 2rpx;
+  border-color: #b6011f;
+  border-style: solid;
+  border-radius: 30rpx;
+  color: #b6011f;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  font-size: 30rpx;
+}
+
+.startBtPressed{
+  display: flex;
+  align-items: center;
+  height: 55rpx;
+  border-width: 2rpx;
+  border-color: #b6011f;
+  border-style: solid;
+  border-radius: 30rpx;
+  color: #b6011f;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  font-size: 30rpx;
+  background-color: #c96c7c;
+}
+
+#scroll-list {
+  height: 1220rpx;
+}

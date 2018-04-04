@@ -1,0 +1,14 @@
+<wxs src="../../../utils/common.wxs" module="wxsUtil" />
+
+<view style='width:100%;font-size:30rpx;color:#a4a4a4;background-color:#f7f7f7;padding-left:20rpx;padding-top:10rpx;padding-bottom:15rpx;'>资料简介</view>
+<view style='width:100%;font-size:32rpx;color:#4d4d4d;background-color:#ffffff;padding-left:20rpx;padding-top:20rpx;padding-bottom:25rpx;'>{{obj.strNote}}</view>
+<view style='width:100%;font-size:30rpx;color:#a4a4a4;background-color:#f7f7f7;padding-left:20rpx;padding-top:10rpx;padding-bottom:15rpx;'>资料类别</view>
+<view style='width:100%;font-size:32rpx;color:#4d4d4d;background-color:#ffffff;padding-left:20rpx;padding-top:20rpx;padding-bottom:25rpx;'>{{obj.strTypeName}}</view>
+<view style='width:100%;font-size:30rpx;color:#a4a4a4;background-color:#f7f7f7;padding-left:20rpx;padding-top:10rpx;padding-bottom:15rpx;'>学习资料</view>
+<view style='flex-direction: row;display:flex;align-items: center;background-color:#ffffff;' bindtap='openFile'>
+  <image class='dataCover ' src="{{obj.strImgUrl}}" binderror="binddataerrorimg"></image>
+  <view style='width:400rpx;padding-right:20rpx;padding-top:20rpx;padding-bottom:20rpx; '>
+    <view style='font-size:34rpx;color:#404040 '>{{obj.strDataName}}</view>
+    <view style='font-size:32rpx;color:#a4a4a4 '>{{wxsUtil.bytesToSize(obj.numFileSize)}}</view>
+  </view>
+</view>

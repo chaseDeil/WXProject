@@ -1,0 +1,45 @@
+page {
+  width: 100%;
+  height: 100%；;
+}
+
+.tv_time {
+  width: 100%;
+  font-size: 30rpx;
+  color: #d4d4d4;
+  margin-top: 20rpx;
+  margin-bottom: 15rpx;
+  text-align: center;
+}
+
+.label {
+  background-color: #fff;
+  border-radius: 15rpx;
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+  margin-top: 15rpx;
+  margin-bottom: 15rpx;
+  padding: 25rpx;
+}
+
+.label_press{
+  background-color: #f0f0f0;
+  border-radius: 15rpx;
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+  margin-top: 15rpx;
+  margin-bottom: 15rpx;
+  padding: 25rpx;
+}
+
+.title {
+  font-size: 30rpx;
+  color: #a4a4a4;
+  margin-bottom: 20rpx;
+}
+
+.content {
+  font-size: 32rpx;
+  color: #404040;
+ 
+}

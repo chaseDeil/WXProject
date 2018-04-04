@@ -1,0 +1,56 @@
+<!--pages/mine/mine.wxml-->
+<page>
+  <scroll-view class='mineScrollView' scroll-y="true" scroll-with-animation="true" id="scroll-list">
+  <view class='topView'>
+    <view class='imgView'>
+      <image class='headerImg' mode='aspectFit' src='{{headerImg}}'></image>
+    </view>
+    <view class='textView'>
+      <text class='nameText'>奥远·王冰</text> 
+      <text class='signText'>签名：这个人很懒，什么都没有留下</text> 
+    </view>
+     
+  </view>
+
+  <!-- <view class='cell'>
+    <view class='item' bindtap='myInfo'>
+      <image class='itemImg' src='{{headerImg}}'></image>
+      <text class='itemName'>我的消息</text>
+    </view>
+    <view class='line'></view>
+    <view class='item'>
+      <image class='itemImg' src='{{headerImg}}'></image>
+      <text class='itemName'>我的通讯录</text>
+    </view>
+
+  </view> -->
+  <view class='cell'>
+    <view class='item'>
+      <image class='itemImg' src='{{richengImg}}'></image>
+      <text class='itemName'>我的日程</text>
+    </view>
+    <view class='line'></view>
+    <view class='item'>
+      <image class='itemImg' src='{{huiyiImg}}'></image>
+      <text class='itemName'>我的会议</text>
+    </view>
+  </view>
+  <view class='cell'>
+    <view class='item' bindtap='showMyPractice'>
+      <image class='itemImg' src='{{lianxiImg}}'></image>
+      <text class='itemName'>我的练习</text>
+    </view>
+    <view class='line'></view>
+    <view class='item' bindtap='showMyExam'>
+      <image class='itemImg' src='{{kaoshiImg}}'></image>
+      <text class='itemName'>我的考试</text>
+    </view>
+  </view>
+  <view class='cellSingle'>
+    <view class='item'bindtap='showSetting' >
+      <image class='itemImg' src='{{shezhiImg}}'></image>
+      <text class='itemName'>设置</text>
+    </view>
+  </view>
+  </scroll-view>
+</page>

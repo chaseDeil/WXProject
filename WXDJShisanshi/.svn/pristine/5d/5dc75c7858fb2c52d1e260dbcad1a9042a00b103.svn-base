@@ -1,0 +1,68 @@
+
+const util = require('../../utils/util.js')
+var app = getApp()
+Page({
+  data: {
+    pics: [],
+    array: []
+  },
+
+  onLoad: function () {
+    var that = this;
+    util.requestGet('mobileShareNewsAction!getShareNewsListInfo.action', { userId: app.globalData.userId }, function (res) {
+      that.setData({
+        pics: res.data['obj']['jsonArrayImg'],
+        array: res.data['obj']['jsonArrayInfo']
+      })
+    })
+  },
+
+  imgClick: function (e) {
+    var index = parseInt(e.currentTarget.dataset.index);
+    console.log(this.data.array[index]['strDetailUrl'])
+    app.globalData.url = this.data.array[index]['strDetailUrl']
+    wx.navigateTo({
+      url: '../web/web'
+    })
+  },
+
+  itemClick: function (e) {
+    var index = parseInt(e.currentTarget.dataset.index);
+    console.log(this.data.array[index]['strDetailUrl'])
+    app.globalData.url = this.data.array[index]['strDetailUrl']
+    wx.navigateTo({
+      url: '../web/web'
+    })
+  },
+
+  gotoSanhuiyike: function (e) {
+    // wx.navigateTo({
+    //   url: '../sanhuiyike/sanhuiyike'
+    // })
+    app.globalData.url = util.baseWebUrl + "renda_web/mobile/mobileMeetingInfoAction.action"
+    wx.navigateTo({
+      url: '../web/web'
+    })
+  },
+  gotoStudy: function (e) {
+    wx.navigateTo({
+      url: '../study/mystudy'
+    })
+  },
+  gotoMine: function (e) {
+    wx.navigateTo({
+      url: '../mine/mine'
+    })
+  },
+  gotoRibao: function (e) {
+    wx.navigateTo({
+      url: '../ribao/ribaoList'
+    })
+  },
+  gotoRicheng: function (e) {
+    wx.navigateTo({
+      url: '../richeng/richengMain'
+    })
+  },
+})
+

@@ -1,0 +1,285 @@
+const util = require('../../utils/util.js')
+var app = getApp()
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    tab: true,
+    wodexuexiicon: '/image/xuexi_wode2.png',
+    ziliaoguangchangicon: '/image/ziliaoguangchang.png',
+    bottm_item_text1: 'bottm_item_text_seleced',
+    bottm_item_text2: 'bottm_item_text',
+    data: [],
+    finishCount: 0,
+    practiceCount: 0,
+    examCount: 0,
+    dataCount: 0,
+    objList:"",
+    page:1,
+    height:0,
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    var that = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          height: res.windowHeight
+        })
+      }
+    });
+    
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+    // var i = 0
+    // var len = this.data.data.length
+    // for (; i < len; i++) {
+    //   const ctx = wx.createCanvasContext('canvas_' + i)
+    //   console.log('canvas_' + i)
+
+
+    //   ctx.beginPath()
+    //   ctx.setLineWidth(6)
+    //   ctx.setLineCap('round')
+    //   ctx.moveTo(6, 12)
+    //   ctx.lineTo(wx.getSystemInfoSync().windowWidth*0.45 + 6 , 12)
+    //   ctx.setStrokeStyle('#d4d4d4')
+    //   ctx.stroke()
+
+    //   var progress = this.data.data[i].progress
+    //   var end = wx.getSystemInfoSync().windowWidth * 0.45 / 100 * progress + 6
+    //   ctx.beginPath()
+    //   ctx.setLineWidth(6)
+    //   ctx.setLineCap('round')
+    //   ctx.moveTo(6, 12)
+    //   ctx.lineTo(end, 12)
+    //   ctx.setStrokeStyle('#b6011f')
+    //   ctx.stroke()
+
+    //   ctx.draw()
+    // }
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    var that = this;
+    util.requestGet('learnManagementAction!myStudy.action', { userId: app.globalData.userId }, function (res) {
+      that.setData({
+        finishCount: res.data['obj']['finishCount'],
+        practiceCount: res.data['obj']['practiceCount'],
+        examCount: res.data['obj']['examCount'],
+      })
+    });
+    wx.getStorage({
+      key: 'mydatas' + app.globalData.userId,
+      success: function (res) {
+        that.setData({
+          dataCount: res.data.length
+        })
+      },
+      fail: function (res) {
+        that.setData({
+          dataCount: 0
+        })
+      },
+    });
+
+    util.requestGet('learnManagementAction!getCourseList.action', { userId: app.globalData.userId, page: 1, pageSize: 20 }, function (res) {
+      that.setData({
+        data: res.data['objList']
+      })
+    });
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
+  },
+
+  wodexuexi_ll: function () {
+    var that = this;
+    that.setData({
+      tab: true,
+      wodexuexiicon: '/image/xuexi_wode2.png',
+      ziliaoguangchangicon: '/image/ziliaoguangchang.png',
+      bottm_item_text1: 'bottm_item_text_seleced',
+      bottm_item_text2: 'bottm_item_text'
+    })
+
+  },
+
+  ziliaoguangchang_ll: function () {
+    var that = this;
+    that.setData({
+      tab: false,
+      wodexuexiicon: '/image/xuexi_wode.png',
+      ziliaoguangchangicon: '/image/ziliaoguangchang2.png',
+      bottm_item_text2: 'bottm_item_text_seleced',
+      bottm_item_text1: 'bottm_item_text'
+    })
+    //加载第一页
+    if (that.data.objList == ""){
+      wx.showLoading({
+        title: '加载中',
+      })
+      util.requestGet('learnManagementAction!dataSquare.action', { userId: app.globalData.userId, page: that.data.page, pageSize: 20 }, function (res) {
+        that.setData({
+          objList: res.data['objList']
+        })
+        wx.hideLoading()
+      });
+    }
+  },
+  itemClick: function (event) {
+    wx.navigateTo({
+      url: '../study/classDetail?guid=' + event.currentTarget.dataset.guid
+    })
+  },
+
+  //显示默认图
+  binderrorimg: function (event) {
+    var that = this;
+    var temp = that.data.data
+    for (var i = 0; i < temp.length; i++) {
+      var obj = temp[i];
+      if (obj.strGuid == event.currentTarget.dataset.guid) {
+        obj.strCourseUrl = "/image/kechengmoren.png"
+      }
+    }
+
+    that.setData({
+      data: temp
+    })
+  },
+
+  binddataerrorimg: function (event) {
+    var that = this;
+    var temp = that.data.objList
+    for (var i = 0; i < temp.length; i++) {
+      var obj = temp[i];
+      if (obj.strGuid == event.currentTarget.dataset.guid) {
+        obj.strImgUrl = "/image/moren.png"
+      }
+    }
+
+    that.setData({
+      objList: temp
+    })
+  },
+
+  finishCourse:function() {
+    wx.navigateTo({
+      url: '../study/finishCourse/finishCourse',
+    })
+  },
+
+  myPractice: function () {
+    wx.navigateTo({
+      url: '../study/practice/myPractice', 
+    })
+  },
+
+  myExam: function () {
+    wx.navigateTo({
+      url: '../study/exam/myExam',
+    })
+  },
+
+  myData: function () {
+    wx.navigateTo({
+      url: '../study/Mydata/myData',
+    })
+  },
+
+  loadmore: function (e) {
+    var that = this
+    var page = parseInt(that.data.page) + 1;
+    var objList = that.data.objList;
+    wx.showLoading({
+      title: '加载中',
+    })
+    util.requestGet('learnManagementAction!dataSquare.action', { userId: app.globalData.userId, page: page, pageSize: 20 }, function (res) {
+      wx.hideLoading()
+      if (res.data['objList'].length == 0){
+        wx.showToast({
+          title: '没有更多数据',
+          icon: 'none',
+          duration: 2000
+        });
+      }else{
+        objList = objList.concat(res.data['objList'])
+        that.setData({
+          objList: objList,
+          page: page
+        })
+      }
+      
+    });
+  },
+
+  refresh: function (e) {
+    // var that = this
+    // util.requestGet('learnManagementAction!dataSquare.action', { userId: app.globalData.userId, page: that.data.page, pageSize: 20 }, function (res) {
+    //   wx.showToast({
+    //     title: "刷新成功",
+    //     icon: 'none',
+    //     duration: 2000
+    //   });
+    //   that.setData({
+    //     objList: res.data['objList']
+    //   })
+    // });
+  },
+
+  dataItemClick: function (e) {
+    var that = this
+    var index = parseInt(e.currentTarget.dataset.index)
+    app.globalData.passData = that.data.objList[index]
+    wx.navigateTo({
+      url: '/pages/study/data/dataInfo',
+    })
+  },
+
+})

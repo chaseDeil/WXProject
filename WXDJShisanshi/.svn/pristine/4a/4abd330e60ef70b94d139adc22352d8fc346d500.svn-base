@@ -1,0 +1,28 @@
+<page>
+  <view style='display:flex;flex-direction:column;width:100%;height:100%;align-items:center;'>
+  <image class="cover" src="{{obj.strCourseUrl}}" ></image>
+  <view style="margin-top:30rpx;">{{obj.strCourseName}}</view>
+  <view class="middle">
+    <view style='flex-direction: row;display: flex;width:100%;height:25%;align-items: center;'>
+      <view style='width:50%;'>考试时间</view>
+      <view style='width:50%;text-align: right;'>{{obj.numTestTime}}分钟</view>
+    </view>
+    <view style='flex-direction: row;display: flex;width:100%;height:25%;align-items: center;'>
+      <view style='width:50%;'>考试题数</view>
+      <view style='width:50%;text-align: right;'>{{obj.numQuestionsNumber}}道题</view>
+    </view>
+    <view style='flex-direction: row;display: flex;width:100%;height:25%;align-items: center;'>
+      <view style='width:50%;'>总分数</view>
+      <view style='width:50%;text-align: right;'>{{obj.numTotalScore}}分</view>
+    </view>
+    <view style='flex-direction: row;display: flex;width:100%;height:25%;align-items: center;'>
+      <view style='width:50%;'>及格分数</view>
+      <view style='width:50%;text-align: right;'>{{obj.numPassScores}}分</view>
+    </view>
+  </view>
+  <view style='margin-top:40rpx;width:76%;font-size:30rpx;color:#848484;'>1.考试时间较长，确保手机电量足够使用</view>
+  <view  style='margin-top:20rpx;width:76%;font-size:30rpx;color:#848484;'>2.请在考试时间内进行答题，超时将自动交卷</view>
+
+  <view class="startbt" hover-class='startbt_pressed' bindtap='startbt'>开始考试</view>
+</view>
+</page>

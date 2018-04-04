@@ -1,0 +1,125 @@
+// pages/study/data/dataInfo.js
+var app = getApp()
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    obj: ""
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    this.setData({
+      obj: app.globalData.passData,
+    });
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
+  },
+
+  //打开文档
+  openFile: function () {
+    var that = this;
+    if (that.data.obj['strFileExtension'].toUpperCase() == 'MP4') {
+      app.globalData.url = that.data.obj['strDataUrl']
+      wx.navigateTo({
+        url: '/pages/video/videoplayer',
+      })
+    } else if (that.data.obj['strFileExtension'].toUpperCase() == 'PNG' ||
+      that.data.obj['strFileExtension'].toUpperCase() == 'JPG'){
+      wx.previewImage({
+        urls: [that.data.obj['strDataUrl']] // 需要预览的图片http链接列表
+      });
+    } else {
+      wx.showLoading({
+        title: '文件加载中',
+        mask: true,
+      })
+      //下载文档
+      wx.downloadFile({
+        url: that.data.obj['strDataUrl'],
+        success: function (res) {
+          var path = res.tempFilePath;
+          // console.log("path:" + path);
+          //打开文档
+          wx.openDocument({
+            fileType: that.data.obj['strFileExtension'],
+            filePath: path,
+            success: function (res) {
+              console.log("文档打开成功");
+            },
+            fail: function (res) {
+              console.log(res);
+              wx.showToast({
+                title: '文件不可用！',
+                icon: 'none',
+                duration: 2000
+              });
+            }
+          })
+        },
+        fail: function (res) {
+          console.log(res);
+          wx.showToast({
+            title: '文件找不到了！',
+            icon: 'none',
+            duration: 2000
+          });
+        },
+        complete: function (res) {
+          wx.hideLoading()
+        }
+      })
+    }
+  }
+})

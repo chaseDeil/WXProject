@@ -1,0 +1,44 @@
+/* pages/setting/aboutUs.wxss */
+.page {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.logoImg {
+  margin-top: 30px;
+  width: 100%;
+  height: 120px;
+}
+
+.name {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.version {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #c83b2d;
+  size: 14px;
+}
+
+.company {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.infoView {
+  margin-bottom: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.logoView {
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+}
